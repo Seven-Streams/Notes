@@ -1,1 +1,2 @@
 # Notes
+Seven Streams' notes.
