@@ -136,3 +136,21 @@ $$
 $$
 
 满足了以上的关系，我们就称：$\mathfrak{I}|=\varphi$
+
+# Lec 3
+
+$\Phi$是S-公式的集合，$\varphi$是一个S-公式，那么$\varphi$是$\Phi$的结果，记作$\Phi|=\varphi$，当且仅当对于任意的解释，存在$\mathfrak{I}|=\Phi\implies\mathfrak{I}|=\varphi$
+
+倘若$\Phi$中仅有一个元素$\psi$，那么我们可以用$\psi|=\varphi$来代替之。
+
+一个S-公式是系统认可的(valid)，当且仅当$\empty|=\varphi$，记作$|=\varphi$
+
+一个公式是可满足的，如果存在一个解释，使得$\mathfrak{I}|=\varphi$
+
+$\Phi|=\varphi$当且仅当$\Phi\cup\{\neg\varphi\}$不是可满足的。这是反证法的本质。
+
+我们称两个公式是逻辑等价的，当且仅当$\varphi|=\psi$且$\psi|=\varphi$
+
+通过逻辑等价，我们可以将一个公式化为与之逻辑等价，并且不含有$\wedge,\implies,\iff,\forall$的形式。
+
+一致性引理：考虑两种解释，假如它们的universe都是A，并且每个在$S=S_1\cap S_2$的符号的解释都相同，那么，所有的S-项都有相同的解释。并且，当一个公式在两种解释下，自由变元赋值相同的情况下，该公式在解释1下成立，等价于该公式在解释2下成立。

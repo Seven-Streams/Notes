@@ -179,3 +179,33 @@ $E\sub R^n,\gamma\in C([0,1],R^n)$
 连续映射可以将连通集映射为连通集。我们只需要考虑函数$f\circ\gamma$即可说明这一点。
 
 因此，在一维时，就体现为有界闭区间。
+
+我们称一个聚点是凝聚点，当且仅当周围有不可数个集合中的点。
+
+有界无限点集中至少有一个凝聚点。
+
+我们称一个集合是无处稠密的，当且仅当$(\bar E)^\circ=\empty$
+
+Cantor三分集：这是一个闭集。并且其导集等于其自身，并且是**无处稠密**的。
+
+不连续点之集合为零测集，则可积。
+
+在线性空间中，范数具有等价性。
+
+$P$为投影， $P:\R^2\to \R$若$A\in\R^2$为紧集，则$P(A)$为紧集。
+
+$A\in\R^n$为紧集$\iff F:\{A_x\}$为$\R^n$中的闭集族，$A\cap (\cap_\alpha A_\alpha)=\empty$则 $\exist$有限$A_i\in F,s.t.\ (\cap_{i=1}^kA_i)\cap A=\empty$
+
+Lebesgue数：
+
+$E\sub \R^n$为有界闭集，$\{G_\alpha\}$为$E$之有限开覆盖，则$\exist\sigma>0,s.t.if\ F\cap E\neq\empty,diam(F)<\sigma$则必有$G\in\{G_\alpha\},G\sub F$
+
+$E\in\R^n$为一个连通集，若$E=A\cup B;A,B\neq\empty,A\cap B=\empty$
+
+则$A'\cap B\neq\empty\ or\ A\cap B'\neq\empty$
+
+道路连通可以推出连通。
+
+倘若$E$连通，则$\bar E$亦连通。
+
+可以构造$\bar E=A\cup B$，其为无交并。取出此二集合与$E$之交集，令之为$A_1,B_1$则此二集合不满足上述之性质，矛盾。
