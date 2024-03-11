@@ -209,3 +209,41 @@ $E\in\R^n$为一个连通集，若$E=A\cup B;A,B\neq\empty,A\cap B=\empty$
 倘若$E$连通，则$\bar E$亦连通。
 
 可以构造$\bar E=A\cup B$，其为无交并。取出此二集合与$E$之交集，令之为$A_1,B_1$则此二集合不满足上述之性质，矛盾。
+
+# 第二章 多元映射微分学
+
+## 1、偏导数与微分
+
+在一元时，可导就意味着可微。在多元时，对于每一个点，我们可以固定一个变量的值，然后在一个维度上求导数。
+
+设$D\sub R^2$为一个开机，$f:D\to R$，定义偏导数为${\partial f\over \partial y}(x_0,y_0)=\lim_{\Delta y\to0}{f(x_0,y_0+\Delta y)\over \Delta y}$
+
+为$f$在$(x_0,y_0)$处的偏导数。
+
+若$\forall (x,y)\in D,{\partial f\over \partial y}$总存在，那么我们就得到了一个新的函数$\partial f\over\partial y$，称为$f$关于$y$的偏导函数。
+
+如果我们对$f$对一个变量求偏导后，再次关于一个变量求偏导，那么我们就得到了高阶偏导。我们称${\partial f\over\partial x^i}$关于$x^j$的偏导为$f$的二阶偏导，可以记作$\partial^2 f\over\partial x^j\partial x^i$或$f_{x^ix^j}$
+
+注意，变量的顺序在记法中有着严格要求。
+
+Hamilton算子：$\nabla$
+
+表示对每一个变量求偏导，我们把$\nabla f$称为$f$的梯度，也可以记作$grad(f)$
+
+${\partial f\over\partial x},{\partial f\over\partial y}$在$(x_0,y_0)$的某个邻域中存在且有界，那么$f$在$(x_0,y_0)$处连续。
+
+$f:D\sub R^n\to R,x\in R^n,v\in R^n$
+
+$D_vf(x_0)=\lim_{t\to0^+}{f(x_0+tv)-f(x_0)\over t}$
+
+称为$x_0$处关于$v$的方向导数，记作${\partial f\over\partial v}(x_0)$
+
+此外，有$D_{\lambda v}f(x_0)=\lambda D_vf(x_0)$
+
+从真正多元的观点去考虑，那么还是应该考虑可微。
+
+$D\sub R^n\to R^m,x_0\in D,if\ \exist A\in M_{m\times n}(R),s.t.\\ f(x_0 +h)=f(x_0)+A(x_0)h+o(h)$
+
+则称$f$在$x_0$处可微。$A(x_0)$称为$f$在$x_0$处的微分，可记作$f'(x_0),df(x_0),df|_{x_0}$
+
+亦即：$\lim_{h\to0}{||f(x_0+h)-f(x_0)-A(x_0)h||_{R^m}\over||h||_n}=0$
