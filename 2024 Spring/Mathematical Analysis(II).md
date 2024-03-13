@@ -247,3 +247,35 @@ $D\sub R^n\to R^m,x_0\in D,if\ \exist A\in M_{m\times n}(R),s.t.\\ f(x_0 +h)=f(x
 则称$f$在$x_0$处可微。$A(x_0)$称为$f$在$x_0$处的微分，可记作$f'(x_0),df(x_0),df|_{x_0}$
 
 亦即：$\lim_{h\to0}{||f(x_0+h)-f(x_0)-A(x_0)h||_{R^m}\over||h||_n}=0$
+
+对于线性主部的要求，一方面是线性的，另一方面，要求当在一个单位球内进行映射时，结果有界。
+
+全微分公式：$f(x_0+\Delta x)=f(x_0)+\sum_{i=1}^n a_i\Delta x^i$
+
+考虑到$f:M\to N$
+
+$df|_{x_0}:T_{x_0}M\to T_{f(x_0)}N$
+
+我们将$x^i$视作是一个函数，那么
+
+$x^i:R^n\to R$
+
+含义是取出第i个分量。
+
+根据微分的定义，我们可以有：
+
+$d_{x_i}|_p:R^n\to R$为一线性映射。故，此为一线性泛函。$d_{x_i}|_p\in (R^n)^*$
+
+其值为$\vec e_i$
+
+可微，可以推出函数在此处连续且偏导存在。我们可以用这样的Jacobi矩阵来刻画函数的线性主部。
+
+$$
+\begin{bmatrix}
+{\partial f^1\over\partial x^1}(x_0)&...&{\partial f^1\over\partial x^n}(x_0)\\
+...\\
+{\partial f^m\over\partial x^1}(x_0)&...&{\partial f^m\over\partial x^n}(x_0)
+\end{bmatrix}
+$$
+
+用矩阵的范数，可以确认这是个bounded的线性映射。如果这个映射是一个线性泛函，则其就是梯度了。如果我们在曲面上，欲最小化至一个点的距离，我们应当沿梯度在该点处切空间的投影方向。
