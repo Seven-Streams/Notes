@@ -587,3 +587,35 @@ $f(x)={1\over (\sqrt{2\pi})^n|K|^{1\over 2}}e^{-{1\over2}(x-\mu)^TK^{-1}(x-\mu)}
 对于互信息，$I(X;Y)=\int f(x,y)\log{f(x,y)\over f(x)f(y)}dxdy$
 
 互信息依旧是非负的。微分熵可以有负值。
+
+# Lec 14
+
+ 最大熵原理：
+
+$h(X)\leq{1\over2}\log(2\pi e\sigma^2)$
+
+当$X$符合正态分布时，熵最大。
+
+平衡信息不等式：
+
+$h(X,Y)\leq h(X)+h(Y)\\ h(X,Y,Z)\leq {1\over2}h(X,Y)+{1\over2}h(Y,Z)+{1\over2}h(Z,X)$
+
+等。动机是为了保证式子两边的变量总权重是一样的。这里可以是离散的，可以是连续的。
+
+Han's不等式：
+
+考察指标集$\{1,...,n\}$中之一集合$S$。我们记$X(S)$为下标在$S$中的$x_i$之集合。
+
+记$h^{(n)}_k={1\over C^k_n}\sum_{|S|=k}{h(X(S))\over k}$
+
+$g_k^{(n)}={1\over C^k_n}\sum_{|S|=k}{h(X(S)|X(S^C))\over k}$
+
+显然有$h_k^{(n)}=g_k^{(n)}$
+
+通过平衡信息不等式，$h_k^{(n)}$随k增大而增大。
+
+由联合熵和条件熵的性质,$g_k^{(n)}$随k增大而减少。
+
+Fisher信息：$I(X)=\int_{-\infin}^{+\infin}f(x)[{{\partial\over\partial x}f(x)\over f(x)}]^2dx$
+
+也是针对连续变量提出的。
