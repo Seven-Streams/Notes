@@ -125,7 +125,7 @@ $$
 $$
 \mathfrak{I}|=t_1\equiv t_2\ if\ \mathfrak{I}(t_1)=\mathfrak{I}(t_2)\\
 \mathfrak{I}|=Rt_1...t_n\ if\ (\mathfrak{I}(t_1),...,\mathfrak{I}(t_n))\in R^{\mathfrak{A}}\\
-\mathfrak{I}|=\neg\varphi\ if \mathfrak{I}|\neq \varphi\\
+\mathfrak{I}|=\neg\varphi\ if\ \mathfrak{I}|\neq \varphi\\
 $$
 
 或、和、蕴含、当且仅当同理。当为蕴含时，需要注意，如果前提不对，那怎么都对。
@@ -154,3 +154,29 @@ $\Phi|=\varphi$当且仅当$\Phi\cup\{\neg\varphi\}$不是可满足的。这是�
 通过逻辑等价，我们可以将一个公式化为与之逻辑等价，并且不含有$\wedge,\implies,\iff,\forall$的形式。
 
 一致性引理：考虑两种解释，假如它们的universe都是A，并且每个在$S=S_1\cap S_2$的符号的解释都相同，那么，所有的S-项都有相同的解释。并且，当一个公式在两种解释下，自由变元赋值相同的情况下，该公式在解释1下成立，等价于该公式在解释2下成立。
+
+# Lec 4
+
+我们称从$\pi:\mathfrak{A}\to\mathfrak{B}$是一个同构映射，当：
+
+$\pi$是一个双射。
+
+对于所有的n元关系$R\in S,a_0,...,a_{n-1}\in A$，有$(a_0,...,a_{n-1})\in R^\mathfrak{A}\iff (\pi(a_0),...,\pi(a_{n-1}))\in R^\mathfrak{B}$
+
+对于所有的n元函数$f\in S,a_0,...,a_{n-1}\in A$,有
+
+$\pi(f^\mathfrak{A}(a_0,...,a_{n-1}))=f^\mathfrak{B}(\pi(a_0),...,\pi(a_{n-1}))$
+
+对于所有的常元，我们有$\pi(c^\mathfrak{A})=c^\mathfrak{B}$
+
+我们可以称$\mathfrak{A},\mathfrak{B}$同构，记作$\mathfrak{A}\cong\mathfrak{B}$
+
+同构关系具有：结构与自身同构，交换性，传递性。
+
+如果$\mathfrak{A}\cong\mathfrak{B}$,则$\mathfrak{A}|=\varphi\iff\mathfrak{B}|=\varphi$
+
+也就是说，在一阶逻辑语言下，同构的两个结构不可区分。
+
+为了证明这一点，我们先证明对于所有的S-公式，在赋值满足一定映射的情况下，在两个结构中成立，即$(\mathfrak{A},\beta)|=\varphi\iff(\mathfrak{B},\beta^\pi)|=\varphi$。然后，我们证明所有的项之间有：$\pi(\mathfrak{I}(t))=\mathfrak{I}^\pi(t)$然后，使用归纳假设的方法，得出公式的不可区分性。
+
+我们记$t{t_0,...,t_r\over x_0,...,x_r}$为$t$的一个替换，指将下面的每一个变量替换为上面的对应项。对于公式，我们可以类似地定义之。不过，当对带有$\exist$的公式进行定义时，我们需要考虑非自由变元的问题。比如$\varphi=\exist x\psi$在进行替换时，我们应当“顺便”把$x$换为一个从未使用过的名字。为了使流程规范化，我们定义将这个非自有变元替换为第一个没有在公式和将替换出的项中出现的变元。如果这个变元本身，并未在替换中的项出现，那么我们不需要对原有变元进行重命名。
