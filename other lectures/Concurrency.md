@@ -109,3 +109,66 @@ std::thread::hardware_concurrency()//可以返回并发线程的数量。
 std::thread::id//是一种类型。可以存储线程的id。
 std::this_thread::get_id()//可以返回当前线程的id。为上述提到的类型。
 ```
+
+# 第三章 共享数据
+
+## 条件竞争
+
+我们引入了不变量的概念，比如BPT中的左儿子和右儿子节点等。当进行查询操作时，这些内容没有被修改，所以不变量没有改变，顺序没有任何关系。如果不变量被修改时，其他线程又恰好访问了这一部分数据，那么就会出现UB。我们把这样的数据竞争称为条件竞争。调试过程中，一般调不出来这些问题。因为这样的条件竞争显然是时间敏感的，必须非常凑巧。
+
+## 互斥量
+
+```cpp
+mutex my_mutex;
+vector<int> test; 
+void MyPushBack(int x) {
+  lock_guard<mutex> my_guard(my_mutex);
+  test.push_back(x);
+  return;
+}
+int MyUnder(int x) {
+  lock_guard<mutex> my_guard(my_mutex);
+  return test[x];
+}
+```
+
+使用这样的代码，可以保证两种函数不会同时对数据进行访问。lock_guard类可以自动给对象上锁，并且在析构的时候自动解锁。
+
+在进行编程的时候，尽量不要把受保护的内容引用或指针传递到互斥量作用域之外。
+
+我们需要想办法找到一个锁的合适的颗粒度。如果颗粒度过大，可能BPT的并发两行就写完了，没有意义。如果颗粒度过小，数据的保护效果可能不是很好。
+
+死锁的出现：互相持有一个不同的互斥量，但是相互又想要请求对方的互斥量锁。
+
+```cpp
+mutex mymutex1, mymutex2;
+void Test() {
+  lock(mymutex1, mymutex2);
+  lock_guard my_guard1(mymutex1, adopt_lock);
+  lock_guard my_guard2(mymutex2, adopt_lock);
+}
+```
+
+此为一种解决方案。也就是说，在申请锁的时候，一下子申请两个锁。随后将其分配给lock_guard的实例，转移互斥量的控制权。
+
+为了避免死锁，一般有这么几种方式：避免嵌套锁、使用自己的代码，保持获取锁的固定顺序、使用层次锁结构。
+
+使用herarchical_mutex可以创建不同层的锁实例。一个线程持有高层次锁的时候，可以进一步申请低层次锁。但是持有低层次锁时，无法申请高层次锁。
+
+在初始化时，我们需要将最初的所有线程的初始值设置为最大值，以便于获取任意层次的锁。
+
+unique_lock是一种类似于lock_guard的类型。但是，它更加灵活，可以自行调用lock和unlock函数。在作用域结束后一样会被析构。使用defer_lock而非adopt_lock，就可以只记录互斥量的信息，但不会上锁。unique_lock也是只可移动，不可复制。
+
+## 保护共享数据的方式
+
+为了避免多个线程对同一部分数据进行初始化操作。我们可以引入once_flag和call_once。once_flag用来标记只能执行一次。call_once能够保证只有一个线程可以执行这部分函数。
+
+```cpp
+void f(){};
+once_flag flag;
+call_once(flag,f);
+```
+
+我们也可以保护那些不常用的数据。
+
+如果使用recursive_mutex，那么我们就允许一个线程多次对同一个互斥量上锁。并且需要多次解锁。
