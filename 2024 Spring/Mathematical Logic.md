@@ -179,4 +179,140 @@ $\pi(f^\mathfrak{A}(a_0,...,a_{n-1}))=f^\mathfrak{B}(\pi(a_0),...,\pi(a_{n-1}))$
 
 为了证明这一点，我们先证明对于所有的S-公式，在赋值满足一定映射的情况下，在两个结构中成立，即$(\mathfrak{A},\beta)|=\varphi\iff(\mathfrak{B},\beta^\pi)|=\varphi$。然后，我们证明所有的项之间有：$\pi(\mathfrak{I}(t))=\mathfrak{I}^\pi(t)$然后，使用归纳假设的方法，得出公式的不可区分性。
 
-我们记$t{t_0,...,t_r\over x_0,...,x_r}$为$t$的一个替换，指将下面的每一个变量替换为上面的对应项。对于公式，我们可以类似地定义之。不过，当对带有$\exist$的公式进行定义时，我们需要考虑非自由变元的问题。比如$\varphi=\exist x\psi$在进行替换时，我们应当“顺便”把$x$换为一个从未使用过的名字。为了使流程规范化，我们定义将这个非自有变元替换为第一个没有在公式和将替换出的项中出现的变元。如果这个变元本身，并未在替换中的项出现，那么我们不需要对原有变元进行重命名。
+我们记$t{t_0,...,t_r\over x_0,...,x_r}$为$t$的一个替换，指将下面的每一个变量替换为上面的对应项。对于公式，我们可以类似地定义之。不过，当对带有$\exist$的公式进行定义时，我们需要考虑非自由变元的问题。我们在替换时，去掉那些不需替换、或是如换的情况。比如$\varphi=\exist x\psi$在进行替换时，我们应当“顺便”把$x$换为一个从未使用过的名字。为了使流程规范化，我们定义将这个非自有变元替换为第一个没有在公式和将替换出的项中出现的变元。如果这个变元本身，并未在替换中的项出现，那么我们不需要对原有变元进行重命名。
+
+# Lec 5
+
+替换引理：
+
+$$
+\mathfrak{I}(t{t_0,...,t_r\over x_0,...,x_r})=\mathfrak{I}{\mathfrak{I}(t_0)
+,...,\mathfrak{I}(t_r)\over x_0,...,x_r}(t)\\
+
+\mathfrak{I}|=\varphi{t_0,...,t_r\over x_0,...,x_r}\iff \mathfrak{I}{\mathfrak{I}(t_0)
+,...,\mathfrak{I}(t_r)\over x_0,...,x_r}|=\varphi
+$$
+
+接下来，为了回答证明为什么对的问题，我们需要引入演绎计算的概念。
+
+$$
+\varphi_1...\varphi_n\varphi
+$$
+
+除去最后一项，我们称之为前项，即antecedent，最后一项则是后项，称为succedent。如果演算中可以导出序列$\Gamma\varphi$,那么我们可以记作$|-\Gamma\varphi$，我们称$\Gamma\varphi$是可导出的。
+
+我们称一个公式$\varphi$是可从公式集$\Phi$导出的，记作$\Phi|-\varphi$，当$|-\varphi_1...\varphi_n\varphi$
+
+如果一个序列$\Gamma\varphi$是对的，当$\{\psi|\psi\ is\ a\ member\ of\ \Gamma\}|=\varphi$
+
+演绎计算具有这些规则：
+
+1、前项$\Gamma\in\Gamma'$
+
+$$
+\Gamma\ \varphi\\
+----\\
+\Gamma'\ \varphi
+$$
+
+2、分类讨论
+
+$$
+\Gamma\ \psi\ \varphi\\
+\Gamma\ \neg\psi\ \varphi\\
+----\\
+\gamma\ \varphi
+$$
+
+3、矛盾
+
+$$
+\Gamma\ \neg\varphi\ \psi\\
+\Gamma\ \neg\varphi\ \neg\psi\\
+----\\
+\Gamma\ \varphi
+$$
+
+4、前项引入$\vee$
+
+$$
+\Gamma\ \varphi\ \chi\\
+\Gamma\ \psi\ \chi\\
+----\\
+\Gamma\ (\varphi\vee\psi)\ \chi
+$$
+
+5、后项引入$\vee$
+
+$$
+\Gamma\ \varphi\\
+----\\
+\Gamma\ (\varphi\vee\psi)
+$$
+
+且
+
+$$
+\Gamma\ \varphi\\
+----\\
+\Gamma\ (\psi\vee\varphi)
+$$
+
+6、前项引入$\exist$
+
+$$
+\Gamma\ \varphi_{y\over x}\ \psi\\
+----\\
+\Gamma\ \exist x\varphi\ \psi
+$$
+
+要求是$y\not\in free(\Gamma\cup\{\exist x\varphi,\psi\})$
+
+7、后项引入$\exist$
+
+$$
+\Gamma\ \varphi_{t\over x}\\
+----\\
+\Gamma\ \exist x\varphi
+$$
+
+8、相等
+
+$$
+----\\
+t\equiv t
+$$
+
+9、替换
+
+$$
+\Gamma\ \varphi_{t\over x}\\
+----\\
+\Gamma\ t\equiv t'\ \varphi_{t'\over x}
+$$
+
+我们可以导出一些规则。
+
+1、排中律：$|-(\varphi\vee\neg\varphi)$
+
+2、西边的太阳定律：
+
+$$
+\Gamma\ \psi\\
+\Gamma\ \neg\psi\\
+----\\
+\Gamma\ \varphi
+$$
+
+3、链式法则：
+
+$$
+\Gamma\ \varphi\\
+\Gamma\ \varphi\ \psi\\
+----\\
+\Gamma\ \psi
+$$
+
+$\Phi|-\varphi\iff \exist finite\ \Phi_0\sub \Phi,s.t.\Phi_0|-\varphi$
+
+完备性定理：$\Phi|-\varphi\implies\Phi|=\varphi$
