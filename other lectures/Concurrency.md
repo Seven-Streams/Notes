@@ -172,3 +172,89 @@ call_once(flag,f);
 我们也可以保护那些不常用的数据。
 
 如果使用recursive_mutex，那么我们就允许一个线程多次对同一个互斥量上锁。并且需要多次解锁。
+
+# 第四章 同步操作
+
+## 等待事件或条件
+
+一种方式，是采用
+
+```cpp
+mutex x;
+void test(){
+unique_lock test(x);
+test.unlock();
+this_thread::sleep_for(chrono::milliseconds(100));
+test.lock();
+}
+```
+
+这样操作，允许其他线程在该线程休眠期间，获取mutex的锁。
+
+notify_one函数和wait函数通常会同时使用。这两者都是条件变量的成员函数。notify_one函数是在一个线程的操作基本完成之后，通知其他的线程。其他的线程如果已经调用了wait函数，那么就会重新开始检查，是否满足条件。如果满足条件，就会继续运行。wait函数在条件不满足时，会解锁mutex，保证其他线程可以获取这个互斥量，并且继续等待。否则，则获取这个互斥量。需要注意，在使用notify_one的时候，需要保证当前线程已经获得了所需的mutex。
+
+## future
+
+```cpp
+int f() {
+  return 114514;
+}
+int main() {
+  future<int> test = async(f);
+  this_thread::sleep_for(chrono::seconds(1));
+  cout << test.get() << endl;
+  return 0;
+}
+```
+
+采用这种方式，可以异步处理一定的对象。通过get函数，我们可以返回future事件的处理结果。当然，也可以传参。
+
+```cpp
+auto f1 = async(launch::deferred, f);
+auto f2 = async(lauch::async, f);
+```
+
+f1会在调用get函数或者wait函数的时候才会执行。其被延迟了。f2则会立刻开启了一个新线程开始工作。
+
+packaged_task是一个全新的模版类型，其参数是一个函数的类型签名，（包含函数的类型，形参表）。它会返回一个future类型，并且，它的主要作用在于可以在不同的线程之间达到通信的效果，从而传递数据。不过需要注意的是，一个packaged_task只能执行一次！
+
+promise也是一种类型，其模版参数的使用方法和future相同。
+
+```cpp
+void doWork(std::promise<int>& p) {
+    // 模拟耗时操作
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    int result = 42;
+
+    // 设置值给 promise
+    p.set_value(result);
+}
+
+int main() {
+    std::promise<int> myPromise;
+    std::future<int> result = myPromise.get_future();  // 获取与 promise 关联的 future
+
+    std::thread worker(doWork, std::ref(myPromise));  // 启动线程执行任务
+
+    // 获取任务的返回值
+    int value = result.get();
+    std::cout << "任务的结果：" << value << std::endl;
+
+    worker.join();
+
+    return 0;
+}
+```
+
+使用这种方法，我们可以把线程与promise相连接。通过get_future函数，我们可以获得产生的future类型，并且捕捉相关的异常信息。在async过程中，如果出现了异常，在使用get函数的过程中就可以再次抛出这个异常。对于promise，我们可以调用promise类的set_ecxeption函数，从而显式地给promise对象存储一个异常。
+
+但是，future类是只移动的。我们希望可以使用shared_future实例来进行。shared_future返回的结果是不同步的，我们需要使用互斥量来对访问进行保护。为了减少数据竞争的出现，由于shared_future实例是可拷贝的，所以我们可以将其进行拷贝到线程之中，再次进行操作。
+
+shared_future类型可以使用move函数，将future类型的所有权转移。
+
+## 限时等待
+
+我们可以对线程的等待做出一定的限制。如果等待时间过长，我们就认为其超时了。一般而言，我们具有两种方式进行超时判断。第一种，是时间段，使线程等待比如30ms之类的时间。第二种，是时间点，比如规定在某个时间超时。
+
+mutex和recursive_mutex都不支持超时操作。但是，time_mutex和recursive_timed_mutex都是支持超时操作的。这两种类型都具有try_lock_for()和try_lock_until()函数，可以在一个时间段内持续尝试获取锁，或者在指定的时间点前获取互斥锁。这两个函数的返回值均为bool类型。成功获取锁时，会返回true，失败时，则会返回false。
