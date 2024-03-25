@@ -341,3 +341,77 @@ Pf：对于区域中任意两点$x_0,x$，取一条连续道路$r$，定义$r(1)
 考察$T_*=\sup\{t\in[0,1]|f(r(\tau)=f(x_0),\forall\tau\in[0,t]\}$
 
 如果$T_*<1$由连续性，$f(r(T_*))=f(x_0)$，然后再取一个邻域，运用拉格朗日中值定理，可以说明一条折线上点取值相同，故矛盾。
+
+如果微分中值定理想要推广到高维至高维的映射，那么我们显然不一定找得到合适的$\theta$,使得其成立等式。因此，我们有拟微分中值定理：
+
+$$
+f:D\sub R^n\to R^m
+$$
+
+若$f$可微，并且$D$是一个凸区域，那么有：
+
+$$
+||f(y)-f(x)||\leq||f'(\xi)_2||\ ||y-x||
+$$
+
+我们定义，$||A||_2=\sup_{||x||_2=1}{||Ax||\over ||x||}$
+
+在数值上看，为最大奇异值。
+
+高维映射至一维时的泰勒公式：
+
+定义：$\Delta x\cdot\nabla=\sum_{i=1}^n\Delta x^i{\partial\over\partial x^i}$
+
+从而，我们可以写出：
+
+$f(x_0+\Delta x)=f(x_0)+(\Delta x\cdot\nabla)f(x_0)+{1\over2}(\Delta x\cdot\nabla)^2f(x_0)+...$
+
+一般考虑前二阶即可。其中，我们有：
+
+$$
+(\Delta x\cdot\nabla)^2f(x_0)=\Delta x^TH(f)(x_0)\Delta x
+$$
+
+类似于二次型。我们定义：
+
+$$
+H(f)=({\partial^2 f\over\partial x^i\partial x^j})_{i,j=1}^n
+$$
+
+如果$H$正定，那么是严格极小值；如果$H$负定，那么是严格极大值。
+
+## 4、隐函数与反函数定理
+
+如果我们已经有了一些关系，即$f(x_1,y_1)=0$，在什么样的条件下，我们可以确认一个唯一的映射$y=f(x)$？$x\in R^n,y\in R^m$
+
+从自由度的角度去分析，我们应当有$m$个关系。
+
+如果我们已经知道了$F(x_0,y_0)=0$，我们希望解出$\Delta y=\widehat f(\Delta x)$
+
+$$
+F(x_0+\Delta x,y_0+\Delta y)=F(x_0,y_0)+F_x(x_0,y_0)\Delta x+F_y(x_0,y_0)\Delta y\\
+\Delta y=-[F_y(x_0,y_0)]^{-1}F_x(x_0,y_0)\Delta x
+$$
+
+因此，需要$F_y(x_0,y_0)$可逆。在上式中，我直接省略了$O(\Delta x,\Delta y)$。这一步实质上把非线性问题化归到了线性问题。
+
+如果我们已知$f(x_0)=y_0,f(x_0)+\Delta x=y_0+\Delta y$
+
+如果$\Delta y$给定，我们需要怎样反解出$\Delta x$?
+
+类似地，我们需要把非线性问题转化为线性问题。
+
+$$
+f(x_0)+f'(x_0)\Delta x+O(\Delta x)=y_0+\Delta y\\
+\Delta x=[f'(x_0)]^{-1}\Delta y
+$$
+
+一元隐函数定理：
+
+$$
+(x_0,y_0)\in W\sub R^2\\
+if\ F(x_0,y_0)=0,F\in C^1(W,R),F_y(x_0,y_0)\neq0,\\
+then\ \exist V为开集,x_0\in V,s.t.\\
+\forall x\in V,F(x,y)=0;\forall x\in V,-{{\partial F\over\partial x}(x,y)
+\over {\partial F\over\partial y}(x,y)}|_{y=f(x)}
+$$
