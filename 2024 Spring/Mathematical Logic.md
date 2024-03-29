@@ -153,7 +153,7 @@ $\Phi|=\varphi$当且仅当$\Phi\cup\{\neg\varphi\}$不是可满足的。这是�
 
 通过逻辑等价，我们可以将一个公式化为与之逻辑等价，并且不含有$\wedge,\implies,\iff,\forall$的形式。
 
-一致性引理：考虑两种解释，假如它们的universe都是A，并且每个在$S=S_1\cap S_2$的符号的解释都相同，那么，所有的S-项都有相同的解释。并且，当一个公式在两种解释下，自由变元赋值相同的情况下，该公式在解释1下成立，等价于该公式在解释2下成立。
+Coincidence引理：考虑两种解释，假如它们的universe都是A，并且每个在$S=S_1\cap S_2$的符号的解释都相同，那么，所有的S-项都有相同的解释。并且，当一个公式在两种解释下，自由变元赋值相同的情况下，该公式在解释1下成立，等价于该公式在解释2下成立。
 
 # Lec 4
 
@@ -315,4 +315,52 @@ $$
 
 $\Phi|-\varphi\iff \exist finite\ \Phi_0\sub \Phi,s.t.\Phi_0|-\varphi$
 
-完备性定理：$\Phi|-\varphi\implies\Phi|=\varphi$
+Soundness：$\Phi|-\varphi\implies\Phi|=\varphi$
+
+# Lec 6
+
+我们称$\Phi$是consistent的，记作$cons(\Phi)$，如果没有$\varphi,s.t.\ \Phi|-\varphi,and\ \Phi|-\neg\varphi$
+
+反之，则称为inconsistent。如果一个结构是inconsistent的，当且仅当对于任意的$\varphi,\Phi|-\varphi$
+
+如果一个$\varphi$是consistent的，当且仅当$\exist\varphi,s.t.\Phi|\not-\varphi$
+
+$\Phi$是consistent的，当且仅当$\forall$有限的$\Phi_0\sub\Phi$是consistent的。
+
+每一个可满足的$\Phi$是consistent的。
+
+$\Phi|-\varphi\iff \Phi\cup\{\neg\varphi\}$是inconsistent的。
+
+$\Phi|-\neg\varphi\iff\Phi\cup\{\varphi\}$是inconsistent的。
+
+如果$\Phi$是consistent的，那么$\Phi\cup\{\varphi\}$和$\Phi\cup\{\neg\varphi\}$中至少有一个成立。
+
+Completeness：$\Phi|=\varphi\implies\Phi|-\varphi$
+
+为了说明这一点，我们可以考虑其逆否命题：$\Phi|\not-\varphi\implies\Phi|\neq\varphi$
+
+也就是$\Phi\cup\{\neg\varphi\}$是consistent的$\implies\Phi\cup\{\neg\varphi\}$是可满足的。
+
+Henkin's定理。
+
+为了证明上述结论，我们先引入等价项的概念。$t_1,t_2\in T^S,\Phi|-t_1\equiv t_2$那么，记作$t_1$~$t_2$
+
+~是一种等价关系，若$t_1$~$t_1'$,...$t_n$~$t_n'$，那么$ft_1...t_n$~$ft_1'...t_n'$
+
+$\Phi|-Rt_1...t_n\iff\Phi|-Rt_1'...t_n'$
+
+对于每一个项，我们用其等价项中的一个来代表它，记作$\bar t$
+
+我们为$\Phi$创建一个项结构，记作$\mathfrak{T}^\Phi$
+
+这个结构的universe就是$\{\bar t|t\in T^S\}$
+
+$(\bar t_1,...,\bar t_n)\in R^{\mathfrak{T}^\Phi}$当$\Phi|-Rt_1...t_n$
+
+$f^{\mathfrak{T}^\Phi}(\bar t_1,...,\bar t_n)=\overline{ft_1...t_n}$
+
+$c^{\mathfrak{T}^\Phi}=\bar c$
+
+$\beta^\Phi(v_i)=\bar v_i$
+
+$\mathfrak{I}^\Phi=(\mathfrak{T}^\Phi,\beta^\Phi)$
