@@ -364,3 +364,25 @@ $c^{\mathfrak{T}^\Phi}=\bar c$
 $\beta^\Phi(v_i)=\bar v_i$
 
 $\mathfrak{I}^\Phi=(\mathfrak{T}^\Phi,\beta^\Phi)$
+
+# Lec 7
+
+在这之后，我们需要说明我们创造出的这个结构是良定义的。对于原子公式，这一点是显然的。为了去掉原子性，我们需要一些新的工具。
+
+**完全否定(negation complete)**：$\Phi\vdash\varphi\ or\ \Phi\vdash\neg\varphi$
+
+**包含可成立的证据(contain witnesses)**：$\Phi\vdash(\exist x\varphi\implies\varphi_{\frac{t}{x}})$
+
+如果$\Phi$是negation complete，contain witnesses， consistent，那么我们有下面的这些结论：
+
+$$
+\Phi\vdash\varphi\iff\Phi\not\vdash\neg\varphi\\
+\Phi\vdash(\varphi\vee\psi)\iff\Phi\vdash\varphi\ or\ \Phi\vdash\psi\\
+\Phi\vdash\exist x\varphi\iff\exist t\in T^s\ s.t.\ \Phi\vdash\varphi_{\frac{t}{x}}
+$$
+
+对于第一条的证明，是显然的。对于第二条的证明，我们不妨先假设一个不可证出，然后就能导出另一个可证出。对于第三点，使用Modus ponens(肯定前件）即可。
+
+之后，我们可以引出Henkin‘s Theorem：$\frak{I}^\Phi\vDash\varphi\iff\Phi\vdash\varphi$
+
+如果是原子公式，那么是显然的。对于$\neg,\vee$的处理通过之前的假设就可以得到。对于$\exist$，我们可以对公式的深度进行归纳，即connective rank，然后再进行类似结构归纳的操作。
