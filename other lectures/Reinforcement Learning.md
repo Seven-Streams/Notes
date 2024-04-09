@@ -156,3 +156,39 @@ $$
 V^*(s)=\max_{a\in\mathcal{A}}\{r(s,a)+\gamma\sum_{s'\in\mathcal{S}}P(s'|s,a)V^*(s')\}\\
 Q^*(s,a)=r(s,a)+\gamma\sum_{s'\in\mathcal{S}}P(s'|s,a)\max_{a'\in\mathcal{A}}Q^*(s',a')
 $$
+
+# 第四章 动态规划算法
+
+主要有两种基于动态规划的强化学习算法：策略迭代(policy iteration)和价值迭代(value iteration)。策略迭代由策略评估(policy evaluation)和策略提升(policy improvement)两部分共同构成。
+
+## 悬崖漫步环境
+
+策略评估：用上一轮得到的结果来更新每一个策略的状态价值函数。即
+
+$$
+V^{k+1}(s)=\sum_{a\in\mathcal{A}}\pi(a|s)(r(s,a)+\gamma\sum_{s'\in\mathcal{S}}P(s'|s,a)V^k(s'))
+$$
+
+测试轮数足够多的话，会有$V^k(s)\approx V^\pi(s)$
+
+策略提升：在测试的过程中，对策略本身进行改进。想法是如果进行了足够次数的测试后，如果有：
+
+$$
+Q^\pi(s,\pi'(s))\geq V^\pi(s)
+$$
+
+对任意$s$恒成立，那么
+
+$$
+V^{\pi '}(s)\geq V^\pi
+$$
+
+此为策略提升定理。这一点从直觉上去考虑是成立的。
+
+策略迭代的过程，就是测试、策略评估、策略提升依次进行的过程。
+
+价值迭代也是类似的过程。即
+
+$$
+V^{k+1}(s)=\max_{a\in\mathcal{A}}\{r(s,a)+\gamma\sum_{s'\in\mathcal{S}}P(s'|s,a)V^k(s')\}
+$$
