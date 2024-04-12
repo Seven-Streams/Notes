@@ -108,7 +108,7 @@ $$
 从而，我们可以定义出满足关系，即：
 
 $$
-\mathfrak{I}|=\varphi\\
+\mathfrak{I}\vDash \varphi\\
 
 $$
 
@@ -123,33 +123,33 @@ $$
 我们从而可以定义：
 
 $$
-\mathfrak{I}|=t_1\equiv t_2\ if\ \mathfrak{I}(t_1)=\mathfrak{I}(t_2)\\
-\mathfrak{I}|=Rt_1...t_n\ if\ (\mathfrak{I}(t_1),...,\mathfrak{I}(t_n))\in R^{\mathfrak{A}}\\
-\mathfrak{I}|=\neg\varphi\ if\ \mathfrak{I}|\neq \varphi\\
+\mathfrak{I}\vDash t_1\equiv t_2\ if\ \mathfrak{I}(t_1)=\mathfrak{I}(t_2)\\
+\mathfrak{I}\vDash Rt_1...t_n\ if\ (\mathfrak{I}(t_1),...,\mathfrak{I}(t_n))\in R^{\mathfrak{A}}\\
+\mathfrak{I}\vDash \neg\varphi\ if\ \mathfrak{I}|\neq \varphi\\
 $$
 
 或、和、蕴含、当且仅当同理。当为蕴含时，需要注意，如果前提不对，那怎么都对。
 
 $$
-\mathfrak{I}|=\forall x\varphi\ if\ for\ all\ a\in A,\mathfrak{I}_{a\over x}|=\varphi\\
-\mathfrak{I}|=\exist x\varphi\ if\ for\ some\ a\in A,\mathfrak{I}_{a\over x}|=\varphi
+\mathfrak{I}\vDash \forall x\varphi\ if\ for\ all\ a\in A,\mathfrak{I}_{a\over x}\vDash \varphi\\
+\mathfrak{I}\vDash \exist x\varphi\ if\ for\ some\ a\in A,\mathfrak{I}_{a\over x}\vDash \varphi
 $$
 
-满足了以上的关系，我们就称：$\mathfrak{I}|=\varphi$
+满足了以上的关系，我们就称：$\mathfrak{I}\vDash \varphi$
 
 # Lec 3
 
-$\Phi$是S-公式的集合，$\varphi$是一个S-公式，那么$\varphi$是$\Phi$的结果，记作$\Phi|=\varphi$，当且仅当对于任意的解释，存在$\mathfrak{I}|=\Phi\implies\mathfrak{I}|=\varphi$
+$\Phi$是S-公式的集合，$\varphi$是一个S-公式，那么$\varphi$是$\Phi$的结果，记作$\Phi\vDash \varphi$，当且仅当对于任意的解释，存在$\mathfrak{I}\vDash \Phi\implies\mathfrak{I}\vDash \varphi$
 
-倘若$\Phi$中仅有一个元素$\psi$，那么我们可以用$\psi|=\varphi$来代替之。
+倘若$\Phi$中仅有一个元素$\psi$，那么我们可以用$\psi\vDash \varphi$来代替之。
 
-一个S-公式是系统认可的(valid)，当且仅当$\empty|=\varphi$，记作$|=\varphi$
+一个S-公式是系统认可的(valid)，当且仅当$\empty\vDash \varphi$，记作$\vDash \varphi$
 
-一个公式是可满足的，如果存在一个解释，使得$\mathfrak{I}|=\varphi$
+一个公式是可满足的，如果存在一个解释，使得$\mathfrak{I}\vDash \varphi$
 
-$\Phi|=\varphi$当且仅当$\Phi\cup\{\neg\varphi\}$不是可满足的。这是反证法的本质。
+$\Phi\vDash \varphi$当且仅当$\Phi\cup\{\neg\varphi\}$不是可满足的。这是反证法的本质。
 
-我们称两个公式是逻辑等价的，当且仅当$\varphi|=\psi$且$\psi|=\varphi$
+我们称两个公式是逻辑等价的，当且仅当$\varphi\vDash \psi$且$\psi\vDash \varphi$
 
 通过逻辑等价，我们可以将一个公式化为与之逻辑等价，并且不含有$\wedge,\implies,\iff,\forall$的形式。
 
@@ -173,11 +173,11 @@ $\pi(f^\mathfrak{A}(a_0,...,a_{n-1}))=f^\mathfrak{B}(\pi(a_0),...,\pi(a_{n-1}))$
 
 同构关系具有：结构与自身同构，交换性，传递性。
 
-如果$\mathfrak{A}\cong\mathfrak{B}$,则$\mathfrak{A}|=\varphi\iff\mathfrak{B}|=\varphi$
+如果$\mathfrak{A}\cong\mathfrak{B}$,则$\mathfrak{A}\vDash \varphi\iff\mathfrak{B}\vDash \varphi$
 
 也就是说，在一阶逻辑语言下，同构的两个结构不可区分。
 
-为了证明这一点，我们先证明对于所有的S-公式，在赋值满足一定映射的情况下，在两个结构中成立，即$(\mathfrak{A},\beta)|=\varphi\iff(\mathfrak{B},\beta^\pi)|=\varphi$。然后，我们证明所有的项之间有：$\pi(\mathfrak{I}(t))=\mathfrak{I}^\pi(t)$然后，使用归纳假设的方法，得出公式的不可区分性。
+为了证明这一点，我们先证明对于所有的S-公式，在赋值满足一定映射的情况下，在两个结构中成立，即$(\mathfrak{A},\beta)\vDash \varphi\iff(\mathfrak{B},\beta^\pi)\vDash \varphi$。然后，我们证明所有的项之间有：$\pi(\mathfrak{I}(t))=\mathfrak{I}^\pi(t)$然后，使用归纳假设的方法，得出公式的不可区分性。
 
 我们记$t{t_0,...,t_r\over x_0,...,x_r}$为$t$的一个替换，指将下面的每一个变量替换为上面的对应项。对于公式，我们可以类似地定义之。不过，当对带有$\exist$的公式进行定义时，我们需要考虑非自由变元的问题。我们在替换时，去掉那些不需替换、或是如换的情况。比如$\varphi=\exist x\psi$在进行替换时，我们应当“顺便”把$x$换为一个从未使用过的名字。为了使流程规范化，我们定义将这个非自有变元替换为第一个没有在公式和将替换出的项中出现的变元。如果这个变元本身，并未在替换中的项出现，那么我们不需要对原有变元进行重命名。
 
@@ -189,8 +189,8 @@ $$
 \mathfrak{I}(t{t_0,...,t_r\over x_0,...,x_r})=\mathfrak{I}{\mathfrak{I}(t_0)
 ,...,\mathfrak{I}(t_r)\over x_0,...,x_r}(t)\\
 
-\mathfrak{I}|=\varphi{t_0,...,t_r\over x_0,...,x_r}\iff \mathfrak{I}{\mathfrak{I}(t_0)
-,...,\mathfrak{I}(t_r)\over x_0,...,x_r}|=\varphi
+\mathfrak{I}\vDash \varphi{t_0,...,t_r\over x_0,...,x_r}\iff \mathfrak{I}{\mathfrak{I}(t_0)
+,...,\mathfrak{I}(t_r)\over x_0,...,x_r}\vDash \varphi
 $$
 
 接下来，为了回答证明为什么对的问题，我们需要引入演绎计算的概念。
@@ -199,11 +199,11 @@ $$
 \varphi_1...\varphi_n\varphi
 $$
 
-除去最后一项，我们称之为前项，即antecedent，最后一项则是后项，称为succedent。如果演算中可以导出序列$\Gamma\varphi$,那么我们可以记作$|-\Gamma\varphi$，我们称$\Gamma\varphi$是可导出的。
+除去最后一项，我们称之为前项，即antecedent，最后一项则是后项，称为succedent。如果演算中可以导出序列$\Gamma\varphi$,那么我们可以记作$\vdash \Gamma\varphi$，我们称$\Gamma\varphi$是可导出的。
 
-我们称一个公式$\varphi$是可从公式集$\Phi$导出的，记作$\Phi|-\varphi$，当$|-\varphi_1...\varphi_n\varphi$
+我们称一个公式$\varphi$是可从公式集$\Phi$导出的，记作$\Phi\vdash \varphi$，当$\vdash \varphi_1...\varphi_n\varphi$
 
-如果一个序列$\Gamma\varphi$是对的，当$\{\psi|\psi\ is\ a\ member\ of\ \Gamma\}|=\varphi$
+如果一个序列$\Gamma\varphi$是对的，当$\{\psi|\psi\ is\ a\ member\ of\ \Gamma\}\vDash \varphi$
 
 演绎计算具有这些规则：
 
@@ -293,7 +293,7 @@ $$
 
 我们可以导出一些规则。
 
-1、排中律：$|-(\varphi\vee\neg\varphi)$
+1、排中律：$\vdash (\varphi\vee\neg\varphi)$
 
 2、西边的太阳定律：
 
@@ -313,41 +313,41 @@ $$
 \Gamma\ \psi
 $$
 
-$\Phi|-\varphi\iff \exist finite\ \Phi_0\sub \Phi,s.t.\Phi_0|-\varphi$
+$\Phi\vdash \varphi\iff \exist finite\ \Phi_0\sub \Phi,s.t.\Phi_0\vdash \varphi$
 
-Soundness：$\Phi|-\varphi\implies\Phi|=\varphi$
+Soundness：$\Phi\vdash \varphi\implies\Phi\vDash \varphi$
 
 # Lec 6
 
-我们称$\Phi$是consistent的，记作$cons(\Phi)$，如果没有$\varphi,s.t.\ \Phi|-\varphi,and\ \Phi|-\neg\varphi$
+我们称$\Phi$是consistent的，记作$cons(\Phi)$，如果没有$\varphi,s.t.\ \Phi\vdash \varphi,and\ \Phi\vdash \neg\varphi$
 
-反之，则称为inconsistent。如果一个结构是inconsistent的，当且仅当对于任意的$\varphi,\Phi|-\varphi$
+反之，则称为inconsistent。如果一个结构是inconsistent的，当且仅当对于任意的$\varphi,\Phi\vdash \varphi$
 
-如果一个$\varphi$是consistent的，当且仅当$\exist\varphi,s.t.\Phi|\not-\varphi$
+如果一个$\varphi$是consistent的，当且仅当$\exist\varphi,s.t.\Phi\not\vdash\varphi$
 
 $\Phi$是consistent的，当且仅当$\forall$有限的$\Phi_0\sub\Phi$是consistent的。
 
 每一个可满足的$\Phi$是consistent的。
 
-$\Phi|-\varphi\iff \Phi\cup\{\neg\varphi\}$是inconsistent的。
+$\Phi\vdash \varphi\iff \Phi\cup\{\neg\varphi\}$是inconsistent的。
 
-$\Phi|-\neg\varphi\iff\Phi\cup\{\varphi\}$是inconsistent的。
+$\Phi\vdash \neg\varphi\iff\Phi\cup\{\varphi\}$是inconsistent的。
 
 如果$\Phi$是consistent的，那么$\Phi\cup\{\varphi\}$和$\Phi\cup\{\neg\varphi\}$中至少有一个成立。
 
-Completeness：$\Phi|=\varphi\implies\Phi|-\varphi$
+Completeness：$\Phi\vDash \varphi\implies\Phi\vdash \varphi$
 
-为了说明这一点，我们可以考虑其逆否命题：$\Phi|\not-\varphi\implies\Phi|\neq\varphi$
+为了说明这一点，我们可以考虑其逆否命题：$\Phi\not\vdash\varphi\implies\Phi|\neq\varphi$
 
 也就是$\Phi\cup\{\neg\varphi\}$是consistent的$\implies\Phi\cup\{\neg\varphi\}$是可满足的。
 
 Henkin's定理。
 
-为了证明上述结论，我们先引入等价项的概念。$t_1,t_2\in T^S,\Phi|-t_1\equiv t_2$那么，记作$t_1$~$t_2$
+为了证明上述结论，我们先引入等价项的概念。$t_1,t_2\in T^S,\Phi\vdash t_1\equiv t_2$那么，记作$t_1$~$t_2$
 
 ~是一种等价关系，若$t_1$~$t_1'$,...$t_n$~$t_n'$，那么$ft_1...t_n$~$ft_1'...t_n'$
 
-$\Phi|-Rt_1...t_n\iff\Phi|-Rt_1'...t_n'$
+$\Phi\vdash Rt_1...t_n\iff\Phi\vdash Rt_1'...t_n'$
 
 对于每一个项，我们用其等价项中的一个来代表它，记作$\bar t$
 
@@ -355,7 +355,7 @@ $\Phi|-Rt_1...t_n\iff\Phi|-Rt_1'...t_n'$
 
 这个结构的universe就是$\{\bar t|t\in T^S\}$
 
-$(\bar t_1,...,\bar t_n)\in R^{\mathfrak{T}^\Phi}$当$\Phi|-Rt_1...t_n$
+$(\bar t_1,...,\bar t_n)\in R^{\mathfrak{T}^\Phi}$当$\Phi\vdash Rt_1...t_n$
 
 $f^{\mathfrak{T}^\Phi}(\bar t_1,...,\bar t_n)=\overline{ft_1...t_n}$
 
@@ -386,3 +386,23 @@ $$
 之后，我们可以引出Henkin‘s Theorem：$\frak{I}^\Phi\vDash\varphi\iff\Phi\vdash\varphi$
 
 如果是原子公式，那么是显然的。对于$\neg,\vee$的处理通过之前的假设就可以得到。对于$\exist$，我们可以对公式的深度进行归纳，即connective rank，然后再进行类似结构归纳的操作。
+
+# Lec 8
+
+如果符号集是至多可数的，令$\Phi\sub L^S$
+
+定义：$\text{free}(\Phi)=\cup_{\varphi\in\Phi}\text{free}(\varphi)$
+
+我们需要说明两个引理：
+
+$\text{free}(\Phi)$如果是有限的，那么存在一个consistent的$\Psi,\Phi\sub\Psi\sub L^S,\Psi$contain witnesses。
+
+$\Psi$是consistent的，那么存在一个$\Theta\in L^S,s.t.\Theta$是完全否定的。
+
+因此，我们得到一个推论：只要$\text{free}(\Phi)$是有限的，一定可以找到一个我们所希望的$\Theta$,从而$\Phi$是satisfiable的。
+
+证明第一点，我们可以把所有存在性的句子都拿出来，它们必然是可数多个，从而进行判断。我们通过归纳法和演绎计算，证明每一个$\Phi_i$都应该是contain witness的。
+
+证明第二点，我们考虑每一个公式，如果它证不出来，那么就加入$\Theta_n$中并成为$\Theta_{n+1}$，最后取并即可。
+
+最后，我们的想法，就是把有限变元这个条件给去掉。为了做到这一点，我们可以对公式中的每一个变元用一个常量进行替换，并且保证对这个常量的解释与对原有变元的赋值相同。通过替换引理和一致性引理可以证明。
