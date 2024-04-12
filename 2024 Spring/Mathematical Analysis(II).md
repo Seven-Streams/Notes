@@ -538,4 +538,39 @@ $f\in R(D)\iff \lim_{||\pi||\to0}(\bar S(f,\pi)-\underline S(f,\pi))=0$
 
 ## 重积分的性质与计算
 
-类似于一元时的情况，重积分具有线性可加性，区间可加性，乘积可积性，保序性，
+类似于一元时的情况，重积分具有线性可加性，区间可加性，乘积可积性，保序性，绝对可积性，第一积分中值定理。
+
+Fubimi定理：$D=[a,b]\times[c,d],f\in R(D)$
+
+若$\forall x\in[a,b],h(x)=\int_c^df(x,y)dy$有定义，则$h\in R[a,b],\int_a^bh(x)dx=\iint_Dfdxdy$
+
+这个定理用划分的方式进行证明。我们先考虑固定一个维度，考虑取出另一维度中的$\xi_i$，$\xi_i$在$[x_{i-1},x_i]$之间。那么，有：
+
+$$
+\sum_{j=1}^m\inf_{(x,y)\in D_{ij}}f(x,y)\Delta y_j\leq\sum_{j=1}^mf(\xi_i,y)dy\leq
+\sum_{j=1}^m\sup_{(x,y)\in D_{ij}}f(x,y)\Delta y_j
+$$
+
+随后，在不等式上乘上$\Delta x$
+
+左侧就成为了Darboux小和，右侧就成为了Darboux大和。从而由迫敛性可得。
+
+进行推论，倘$f\in C(D)$
+
+$$
+
+\iint_{D}f(x,y)dxdy=\int_a^bdx\int_{y_1{(x)}}^{y_2(x)}dyf(x,y)
+$$
+
+可以先x，也可以先y。
+
+多元变量替换：$T:D\to D'$有连续偏导数，$\det T'\neq0$，$f\in C(D)$
+
+则
+
+$$
+\iint_Df(x,y)dxdy=\iint_{D'}f(x(u,v),y(u,v))|J|dudv\\
+J=\frac{\partial(x,y)}{\partial(u,v)}
+$$
+
+原因是，$J$的行列式刻画了这个变换导致的面积缩放比例。
