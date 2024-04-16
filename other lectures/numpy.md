@@ -424,3 +424,80 @@ x = z[indices]
 ```
 
 修改indices，我们可以获得不同的值。
+
+# 用genfromtxt输入
+
+需要使用stringIO库。
+
+```python
+data = "1,2,3\n4,5,6"
+x = np.genfromtxt(StringIO(data), delimiter=",")
+# x = 
+#array([[1., 2., 3.],
+#       [4., 5., 6.]])
+```
+
+通过这样的方式，我们生成的对象可以长得和我们的输入十分相似。
+
+```python
+data = u"  1  2  3\n  4  5 67\n890123  4"
+x = np.genfromtxt(StringIO(data), delimiter=3)
+# x = 
+# array([[  1.,    2.,    3.],
+#        [  4.,    5.,   67.],
+#        [890.,  123.,    4.]])
+data = u"123456789\n   4  7 9\n   4567 9"
+x = np.genfromtxt(StringIO(data), delimiter=(4, 3, 2))
+# x =
+# array([[1234.,   567.,    89.],
+#       [   4.,     7.,     9.],
+#        [   4.,   567.,     9.]])
+```
+
+这样可以要求切片的大小与位置的关系。
+
+```python
+data = u"1, abc , 2\n 3, xxx, 4"
+x = np.genfromtxt(StringIO(data), delimiter=",", dtype="|U5")
+y = np.genfromtxt(StringIO(data), delimiter=",", dtype="|U5", autostrip=True)
+# x = 
+# array([['1', ' abc ', ' 2'],
+#        ['3', ' xxx', ' 4']], dtype='<U5')
+# y = 
+# array([['1', 'abc', '2'],
+#        ['3', 'xxx', '4']], dtype='<U5')
+```
+
+autostrip可以忽略空格。
+
+```python
+data = u"""#
+# Skip me !
+# Skip me too !
+1, 2
+3, 4
+5, 6 #This is the third line of the data
+7, 8
+# And here comes the last line
+9, 0
+"""
+x = np.genfromtxt(StringIO(data), comments="#", delimiter=",")
+# x = 
+# array([[1., 2.],
+#        [3., 4.],
+#        [5., 6.],
+#        [7., 8.],
+#        [9., 0.]])
+```
+
+这样可以忽略注释行。符号可以更改。
+
+```python
+data = u"1 2 3\n4 5 6"
+x = np.genfromtxt(StringIO(data), usecols=(0, -1))
+# x = 
+# array([[1.,  3.],
+#        [4.,  6.]])
+```
+
+这样可以选择特定的行进行操作。比如可以忽略开头列等。
