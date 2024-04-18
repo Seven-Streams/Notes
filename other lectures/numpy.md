@@ -500,4 +500,94 @@ x = np.genfromtxt(StringIO(data), usecols=(0, -1))
 #        [4.,  6.]])
 ```
 
-这样可以选择特定的行进行操作。比如可以忽略开头列等。
+这样可以选择特定的列进行操作。比如可以忽略开头列等。
+
+需要注意的是，numpy中的dtype不仅可以是一种指定的类型，还可以是一个键值、类型对。我们把键值称为其名字。
+
+```python
+data = u"1 2 3\n4 5 6"
+x = np.genfromtxt(data, dtype=[(_, int) for _ in "abc"])
+# x =
+# array([(1, 2, 3), (4, 5, 6)],
+#       dtype=[('a', '<i4'), ('b', '<i4'), ('c', '<i4')])
+```
+
+这样子我们就为每一列中的元素指定了不同的名字。
+
+```python
+data = StringIO("1 2 3\n 4 5 6")
+np.genfromtxt(data, names="A, B, C")
+```
+
+这样子，也可以达到和上述代码类似的效果。
+
+```python
+data = StringIO("woc,Bing!\n#a b c\n1 2 3\n 4 5 6")
+x = np.genfromtxt(data, skip_header=1, names=True)
+# x =
+# array([(1., 2., 3.), (4., 5., 6.)],
+#       dtype=[('a', '<f8'), ('b', '<f8'), ('c', '<f8')])
+```
+
+其中的参数，表示在读取的过程中，会跳过第一行。并且，会启用名字：即跳过头后的第一行。
+
+```python
+data = StringIO("1 2 3\n 4 5 6")
+names = ["A", "B", "C"]
+x = np.genfromtxt(data, names=names)
+# x = 
+# array([(1, 2., 3), (4, 5., 6)],
+#       dtype=[('A', '<i8'), ('B', '<f8'), ('C', '<i8')])
+```
+
+这样，可以用其他的列表来充当名字。
+
+```python
+data = StringIO("1 2 3\n 4 5 6")
+x = np.genfromtxt(data, dtype=(int, float, int))
+# x =
+# array([(1, 2., 3), (4, 5., 6)],
+#       dtype=[('f0', '<i4'), ('f1', '<f8'), ('f2', '<i4')])
+```
+
+如果我们指定了类型，并且没有指定其他的名字，那么numpy就会自动生成f0,f1,f2...这样的名字。如果名字参数数量少于列数，也会有同样的事情发生。
+
+```python
+data = StringIO("1 2 3\n 4 5 6")
+x = np.genfromtxt(data, dtype=(int, float, int), defaultfmt="var_%02i")
+# x = 
+# array([(1, 2., 3), (4, 5., 6)],
+#       dtype=[('var_00', '<i4'), ('var_01', '<f8'), ('var_02', '<i4')])
+```
+
+可使用这样的方式设计命名默认值。
+
+```python
+convertfunc = lambda x: float(x.strip(b"%"))/100.
+data = u"1, 2.3%, 45.\n6, 78.9%, 0"
+names = ("i", "p", "n")
+x = np.genfromtxt(StringIO(data), delimiter=",", names=names, 
+converters={1: convertfunc})
+# x =
+# array([(1., 0.023, 45.), (6., 0.789, 0.)],
+#       dtype=[('i', '<f8'), ('p', '<f8'), ('n', '<f8')])
+```
+
+这样，可以对输入的数据进行一次转化。
+
+一般情况下，我们不一定能获得还不错的数据。数据很有可能会出现缺失等情况。
+
+```python
+data = u"N/A, 2, 3\n4, ,???"
+kwargs = dict(delimiter=",",
+               dtype=int,
+               names="a,b,c",
+               missing_values={0:"N/A", 'b':" ", 2:"???"},
+               filling_values={0:0, 'b':0, 2:-999})
+x =  np.genfromtxt(StringIO(data), **kwargs)
+# x =
+# array([(0, 2,    3), (4, 0, -999)],
+#       dtype=[('a', '<i4'), ('b', '<i4'), ('c', '<i4')])
+```
+
+这样子，我们指定了缺省参数的列表值，以及相对应的填充值。
