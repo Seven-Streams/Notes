@@ -406,3 +406,17 @@ $\Psi$是consistent的，那么存在一个$\Theta\in L^S,s.t.\Theta$是完全�
 证明第二点，我们考虑每一个公式，如果它证不出来，那么就加入$\Theta_n$中并成为$\Theta_{n+1}$，最后取并即可。
 
 最后，我们的想法，就是把有限变元这个条件给去掉。为了做到这一点，我们可以对公式中的每一个变元用一个常量进行替换，并且保证对这个常量的解释与对原有变元的赋值相同。通过替换引理和一致性引理可以证明。
+
+# Lec 9
+
+我们的目标，是去掉符号集可数的限制。
+
+对于contain witness这一部分，我们可以扩充符号集，也就是将$\exist x\varphi\implies\varphi_{\frac{c}{x}}$中的$c$加入之，构成一新的符号集$S',s.t.\text{cons}(\Phi),\text{cons}(\Psi)\Phi\sub\Psi\sub L^{S'}$这一扩充的过程可以无限地进行下去。
+
+对于一个consistent的$\Phi$，取出其中所有的存在性命题，改写成contain witness的命题。那么，这二者的并也是consistent的。我们只要说明每一个有限的$\Phi_i$与其对应的存在性命题的交是consistent的即可。对于剩下的常量解释，我们不用在意。根据一致性引理可得。
+
+我们构造符号集$S_0\sub...S_n\sub...$，对应之可数公式集为$\Phi_i$,定义$S,\Phi$分别为其无穷并。我们定义，$S_{i+1}$为$S_i$与其contain witness公式之并。我们定义，$\Psi_{i+1}$为$\Psi_i$及其contain witness的并。
+
+之后，我们应用Zorn引理。说明在consistent的公式集中，一定有一个最大的公式集。从而，这说明了它是完全否定的。因为它既consistent，并且最大。
+
+从而，我们说明了完备性。
