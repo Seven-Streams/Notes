@@ -595,3 +595,25 @@ x =  np.genfromtxt(StringIO(data), **kwargs)
 # Broadcast机制
 
 broadcast机制会从右向左依次进行检索。两个正在被操作的向量是可比的，当且仅当二者该维度的大小相同，或者其中有一者为1。如果两个向量中，有一个的维数比另一个低，但之前都没有出错的话，那么会自动地扩充维数，使得其成为可操作的。
+
+# View和Copy
+
+numpy中要对数组进行完全的复制，可以使用copy方法。使用view方法，可以看作是类似于Cpp中的传址引用方法。尽管二者的形状可能不同。
+
+```python
+x = np.arange(10)
+y = x.reshape(2, 5)
+y[(0, 0)] = 1
+# x = array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+我们想判断一个np数组是copy还是view，可以调用base。
+
+```python
+x = np.arange(10)
+y = x.reshape(2, 5)
+z = y.base
+# z = array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+如果是copy的话，则会返回None。
