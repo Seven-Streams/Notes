@@ -420,3 +420,60 @@ $\Psi$是consistent的，那么存在一个$\Theta\in L^S,s.t.\Theta$是完全�
 之后，我们应用Zorn引理。说明在consistent的公式集中，一定有一个最大的公式集。从而，这说明了它是完全否定的。因为它既consistent，并且最大。
 
 从而，我们说明了完备性。
+
+# Lec 10
+
+Löwenheim-Skolem定理：
+
+$$
+\Phi\sub L^S,\Phi\text{ is at most countable and satisfiable.}\\
+\exist\mathfrak{I}=(\mathfrak{A},\beta),s.t.\\
+A\text{ is at most countable,}\mathfrak{I}\vDash\Phi
+$$
+
+这一点可以利用项结构进行说明。
+
+如果去掉$\Phi\text{ is at most countable}$，我们可以得到Downward Löwenheim-Skolem定理，区别在于将$A\text{ is at most countable}$改为$|A|\leq|T^S|\leq|L^S|$
+
+因此，对于$\Phi_{\R}=\{\varphi\in L^S_0|(\R,+,\cdot,<,0,1)\vDash\varphi\}$
+
+我们可以挑出一个可数的S-结构，从而使得$\mathfrak{A}\vDash\Phi_\R$
+
+紧致性：
+
+$$
+\Phi\vDash\varphi\iff\exist\text{ finite }\Phi_0\sub\Phi,\Phi_0\vDash\varphi\\
+\text{sat}(\Phi)\iff\forall\text{ finite }\Phi_0\sub\Phi,\text{sat}(\Phi)
+$$
+
+我们定义：
+
+$$
+\text{Mod}(\varphi):=\{\mathfrak{I}|\mathfrak{I}\vDash\varphi\}\\
+\text{Mod}(\Phi)=\{\mathfrak{I}|\mathfrak{I}\vDash\Phi\}=\cap_{\psi\in\Phi}\text{Mod}(\psi)
+$$
+
+紧致性与下面的说法等价：
+
+$$
+\text{Mod}(\varphi)\sub\cup_{\psi\in\Phi}\iff\exist\text{ finite }\Phi_0\sub\Phi,\text{Mod}(\varphi)\sub\cup_{\psi\in\Phi_0}\text{Mod}(\psi)
+$$
+
+定理：
+
+$$
+\Phi\sub L^s ,\forall n\in\N,\exist\mathfrak{I}_n=(\mathfrak{A}_n,\beta_n),
+|A_n|\geq n,\mathfrak{I}_n\vDash\Phi,\text{then}\\
+\exist \text{ infinite } A,\mathfrak{I}\vDash\Phi
+$$
+
+Upward Löwenheim-Skolem定理:
+
+$$
+\Phi\sub L^s,\text{assume }\mathfrak{I}\vDash\Phi,A\text{ is infinite.}\\
+\forall\ B,\exist\  \mathfrak{I}',|A'|>|B|,\mathfrak{I}'\vDash\Phi
+$$
+
+因此，对于：
+
+$\Phi_{\N}=\{\varphi\in L^S_0|(\N,+,\cdot,<,0,1)\vDash\varphi\}$，那么存在一个不可数的S-结构$\mathfrak{A}$,$\mathfrak{A}\vDash\Phi_\N$
