@@ -716,3 +716,45 @@ $D=[a,+\infin)\times[c,+\infin),f\in C(D)$
 $$
 \int_Dfdxdy=\int_a^{+\infin}dx\int_c^{+\infin}dyf(x,y)
 $$
+
+# 第四章 第一类曲线和曲面积分
+
+## 第一类曲线积分
+
+什么是空间中曲线的长度？假设曲线可以被参数化：$r:[\alpha,\beta]\to R^n$,我们令$r(\alpha),r(\beta)$为曲线的两个端点。定义$[\alpha,\beta]$的一个划分$\pi$,考虑$\lim_{||\pi||\to0}\sum_{i=1}^n|P_{i-1}P_i|$，倘该极限存在，且与划分无关，那么称这个曲线是可求长度的，并且与这个极限值数值上相等。
+
+我们定义，$\Gamma:r\in C^1([\alpha,\beta],R^n),r'(t)\neq0$的曲线为正则曲线。正则曲线一定是可求长度的。
+
+考察函数$f$,倘$\lim_{||\pi||\to0}\sum_{i=1}^nf(\xi_i)|P_{i-1}P_i|$存在，并且与$\pi,\xi$无关，则称此极限为$f$在$\Gamma$上的第一类曲线积分，记为$\int_\Gamma fds$
+
+第一类曲线积分与$\Gamma$的方向无关，符合线性性，区域可加性。
+
+## 第一类曲面积分
+
+曲面$\Sigma$
+
+$$
+\Sigma:\vec r:D\sub R^2\to R^n
+$$
+
+如何定义弯曲面的面积？但弯曲面足够小的时候，我们将其简化为线性情况加以考虑。从而有：
+
+$$
+\frac{|\vec r(\vec u_0+\sigma)|}{|\sigma|}\approx|\vec r_u\times\vec r_v|_{(u_0,v_0)}
+$$
+
+定义：$\Sigma$由参数化$r:D\sub R^2\to R^n$，$D$是具有分段光滑边界的有界闭区域，$r\in C^1(D,R^n)$,$|J_r|$列满秩，那么：
+
+$$
+M(\Sigma)=\int_D|\vec r_u(u,v)\times \vec r_v(u,v)|dudv
+$$
+
+一些小的trick：
+
+$$
+|\vec\alpha\times\vec\beta|=\sqrt{|\vec\alpha|^2|\vec\beta|^2-(\vec\alpha\cdot\vec\beta)^2}\\
+E=\vec r_u\cdot\vec r_u\\
+G=\vec r_v\cdot \vec r_v\\
+F=\vec r_u\cdot\vec r_v\\
+M(\Sigma)=\int_D\sqrt{E\cdot G-F^2}dudv
+$$
