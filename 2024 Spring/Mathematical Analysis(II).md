@@ -758,3 +758,48 @@ G=\vec r_v\cdot \vec r_v\\
 F=\vec r_u\cdot\vec r_v\\
 M(\Sigma)=\int_D\sqrt{E\cdot G-F^2}dudv
 $$
+
+此上称为Gauss系数。
+
+考察一个线性映射，$r(u)=Au$，倘
+
+$$
+A=
+\begin{bmatrix}
+A'\\
+0
+\end{bmatrix}
+$$
+
+其中$A'$为一满秩方阵。那么，变换后的单位体积显然变为$|\det A'|$
+
+$$
+A^TA=(A')^TA'\\
+\det(A^TA)=\det((A')^TA')=\det((A')^2)
+$$
+
+对于一般性的$A$的而言，我们可以找到一组标准正交基，使其变为上面的形式。
+
+从而有：
+
+$$
+|r(D)|=\sqrt{\det(A'A)}|D|
+$$
+
+考察非线性的情况。
+
+$$
+r(u_0+\Delta u)=r(u_0)+r'(u_0)\Delta u+o(\Delta u)
+$$
+
+故，有
+
+$$
+|r(\sigma)|\approx|r'(u_0)\sigma|=\sqrt{\det(r'(u_0)^T(r'(u_0)))}|\sigma|
+$$
+
+我们定义：$\Sigma$为一正则曲面，有参数化$r\in C^1(D\sub R^2,R^3),J_r$满秩，$f\in C(\Sigma,R)$，定义$f$在$\Sigma$上的第一曲面积分如下：
+
+$$
+\iint_\Sigma fds=\iint_D f(\vec r(u,v))||\vec r_u\times\vec r_v||_{(u_0,v_0)}dudv
+$$
