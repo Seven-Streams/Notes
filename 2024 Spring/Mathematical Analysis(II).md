@@ -834,4 +834,45 @@ $$
 
 ## 第二类曲面积分
 
-首先，并不一定所有的曲面都可以选取出曲面的一侧。如果指定了曲面上一点的单位法向量，就可以通过连续变动的方式，确定曲面上每一点处的法向量，那么我们就称这个曲面是可定向曲面。
+首先，并不一定所有的曲面都可以选取出曲面的一侧。如果指定了曲面上一点的单位法向量，就可以通过连续变动的方式，确定曲面上每一点处的法向量，那么我们就称这个曲面是可定向曲面。说的更准确些，可以考虑一个不越过边界的，且经过$P$的闭曲线$\Gamma$,如果沿该曲线移动，并让单位法向量连续变动，回到$P$点时，若与起始法向量相同，那么就称其可以定向。
+
+对于正则曲面而言，法向量为$\vec n=\underline+\frac{\vec r_u\times \vec r_v}{||\vec r_u\times\vec r_v||}$
+
+对于可定向曲面而言，只要确定了在一点处，上式取正号或是负号，就可以说明在整个曲面上的符号情况。
+
+我们定义，在正则并且可定向曲面$\Sigma$上倘若选定了定向，那么$\int_\Sigma\vec f\cdot\vec n ds$称为$\vec f$在$\Sigma$上的第二类曲面积分。
+
+我们引入一个形式记号$d\vec s=\vec nds=(\cos\alpha ds,\cos\beta ds,\cos\gamma ds)$，每一项可以认为将曲面投影到了不同的平面上。
+
+$$
+\vec f=(P,Q,R)\\
+\int_\Sigma\vec f\cdot\vec n=\int_\Sigma Pdy\wedge dz+Qdz\wedge dx+Rdx\wedge dy
+$$
+
+$\wedge$称为楔积，表示有方向的面积。
+
+一般地，如果要考察$n$维空间中一般的$k$维曲面积分，我们可以选取$k$个坐标轴组成的子空间，并进行投影。共选取$C_n^k$个不同的子空间进行表征。
+
+如果$\Sigma$由正则参数$\vec r:D\sub R^2\to R^3$给出，则$f\in C(\Sigma,R^3),\int_\Sigma\vec f\cdot\vec n ds=\int_D\vec f(\vec r(u,v))(\underline+)(\vec r_u\times\vec r_v)dudv$
+
+## Green,Gauss,Stokes定理
+
+Green公式考察对象为平面$D$。默认其定向指向纸外，$\partial D$的诱导定向，用右手大拇指指向$D$的定向，手心侧为$D$,四指指向方向即为$\partial D$的诱导定向。
+
+$$
+\iint_D(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})dxdy=\int_{\partial D}Pdx+Qdy
+$$
+
+Gauss公式考察对象为空间闭区域$\Omega$。规定边界定向指向$\Omega$外。那么，有
+
+$$
+\iiint_\Omega\nabla\cdot\vec Fdv=\iint_{\partial\Omega}\vec F\cdot\vec nds
+$$
+
+Stokes公式研究的是曲面$\Sigma$。定向方式和Green公式中一致。
+
+$$
+\iint_\Sigma(\nabla\times\vec F)\vec n ds=\int_{\partial\Sigma}\vec F\vec\tau ds
+$$
+
+总结而言，即为$\int_Mdw=\int_{\partial M}w$
