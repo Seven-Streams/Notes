@@ -519,3 +519,53 @@ lemma:$A^*$是可枚举的。$\{\varphi\in L_0^{S_\infin}|\vDash\varphi\}$也是
 将之前可判定性迁移至此处，则可得到R-可判定性。即$w\to\square$和$w\to w',w'\neq\square$
 
 可枚举性，即是$w=\square$的情况，要求输出了每一个元素。
+
+# Lec 12
+
+$F:\mathcal{A}^*\to\mathcal{B}^*$,我们称一个程序可以计算$F$当对任意的$w\in\mathcal{A}^*$,$P:w\to F(w)$
+
+这个程序定义在$\mathcal{A}\cup\mathcal{B}$上。
+
+对于每一个程序，我们显然可以对每一个语句进行编码，从而得到某个唯一编码。然后，我们将这些程序的编码按照字典序进行排序，那么我们就可以得到一个序结构。我们定义$w_P$为某个程序的编码，其由$n$个$a_0$组成，$n$为其在排序中的序号。$a_0$为域中任意一元素。那么，存在映射$P\to w_p,\Pi=\{w_P|P\text{ is a program over }\mathcal{A}\}$
+
+前者通常被称作哥德尔配数。
+
+$\Pi$是可判定的。
+
+对于一个固定的字母表$\mathcal{A}$，但是$\Pi'_{\text{halt}}=\{w_P|P:w_P\to\text{halt},w_P\in\Pi\},\\ \Pi_{\text{halt}}=\{w_P|P:\square\to\text{halt},w_P\in\Pi\}$
+
+均不可判定。
+
+这两个问题是在可枚举范围内，在规约意义下最困难的问题。二者可以互相规约。对于前者的证明，可以使用反证法。假设存在判定程序$P$，我们可以考虑一个程序和$P$几乎一致，但在输出时进行判断。如果$P$将输出$\square$，则不停机，否则停机。
+
+若$W_A\sub A^*,W_B\sub B^*,\text{if } \exist F,\text{s.t.}, w\in W_A\iff F(w)\in W_B$
+
+那么，$W_A$就可规约到$W_B$。并且，如果$W_B$可判定，那么$W_A$一定可判定。
+
+对于所有的$L_0^{S\infin}$，它们显然是可枚举的。如果我们想要说明一阶逻辑的不可判定性，我们只需要将$\Pi_{\text{halt}}$规约到$L_0^{S\infin}$中valid公式的集合。即可说明不可判定性。
+
+首先，我们规定字母表$\mathcal{A}=\{|\}$
+
+对于每一个程序，假设使用了$n+1$个寄存器，那么我们可以用一个$n+2$元组来表征程序当前的状态。第一个位置表示将要运行哪一行程序。第$k$个位置表征第$k-1$个寄存器中，存放了多少个$|$。
+
+我们定义$S=\{R,<,f,c\}\sub S^\infin$
+
+我们定义$\mathfrak{A}_P:A_P=\N,<=<^\N,f(x)=x+^\N1^\N,c=0^\N$
+
+$R^{\mathfrak{A}_P}$为一个$n+2$元关系符。其即表征了某个元组是否是某个程序可以到达的状态。
+
+首先，我们需要一个合适的$\psi_P$，其需要满足：
+
+$\mathfrak{A}_P\vDash\psi_P\\ \forall\mathfrak{A},\mathfrak{A}\vDash \psi_P\implies\mathfrak{A}\vDash R\bar L\bar m_0...\bar m_n$
+
+首先，我们需要一个“头”，它表征我们构建$\varphi_P$所需要的一些性质。即$<$是一个序结构，$c$是序结构中的最小元素，$x< fx$，$x<y\to (fx<y\vee fx\equiv y)$
+
+这些记为$\psi_0$
+
+那么，$\psi_P=\psi_0\wedge R\bar0\bar0...\bar0\wedge\psi_{\alpha_0}\wedge...\wedge\psi_{\alpha_{k-1}}$
+
+$\psi_\alpha$表征的，就是在任意的输入下，如果$L$为将执行的语句，那么寄存器中的内容将发生的变化，以及将要执行的语句之间的跳转。
+
+我们定义$\varphi_p=\psi_P\to\exist y_0...\exist y_n R\bar k y_0...y_n$
+
+$\bar k$即表征将要执行停机语句。从而，我们得到了一个在停机程序和valid公式之间的规约。说明一阶逻辑中，valid公式具有不可判定性。
