@@ -855,7 +855,7 @@ $\wedge$称为楔积，表示有方向的面积。
 
 如果$\Sigma$由正则参数$\vec r:D\sub R^2\to R^3$给出，则$f\in C(\Sigma,R^3),\int_\Sigma\vec f\cdot\vec n ds=\int_D\vec f(\vec r(u,v))(\underline+)(\vec r_u\times\vec r_v)dudv$
 
-## Green,Gauss,Stokes定理
+## Green,Gauss,Stokes公式
 
 Green公式考察对象为平面$D$。默认其定向指向纸外，$\partial D$的诱导定向，用右手大拇指指向$D$的定向，手心侧为$D$,四指指向方向即为$\partial D$的诱导定向。
 
@@ -876,3 +876,25 @@ $$
 $$
 
 总结而言，即为$\int_Mdw=\int_{\partial M}w$
+
+Green公式在直观上的想法，是将区域划分为了很多小块，随后再进行共同积分。因为积分的方向性，在内部的边界上，结果都被抵消掉了。我们可以考察一小块区域的积分。由于差分，可以构造出导数的形式，从而得到Green公式的形式。
+
+设$D$为平面有界区域，边界由有限条分段光滑曲线构成，具有诱导定向，$P,Q\in C^1(D),\text{then }\int_{\partial D}Pdx+Qdy=\iint_D(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})dxdy$
+
+并且，对于平面上的有界闭区域，边界为分段光滑的简单闭曲线，有
+
+$$
+S=\int_{\partial D}xdy=-\int_{\partial D}ydx=\frac{1}{2}\int_{\partial D}xdy-ydx
+$$
+
+对于平面上的单连通区域，$P,Q\in C^1(D)$，以下四个命题等价。
+
+一、$D$内，任意一条光滑或分段光滑闭曲线$\oint_L Pdx+Qdy=0$
+
+二、$\int_L Pdx+Qdy$与路径无关。
+
+三、存在$D$上的可微函数$U(x,y),s.t.\ dU=Pdx+Qdy$
+
+四、$D$内，$\frac{\partial Q}{\partial x}=\frac{\partial P}{\partial y}$
+
+对于有奇点的区域进行积分，可以将奇点附近挖掉，再进行Green公式。
