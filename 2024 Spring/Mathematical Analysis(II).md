@@ -898,3 +898,12 @@ $$
 四、$D$内，$\frac{\partial Q}{\partial x}=\frac{\partial P}{\partial y}$
 
 对于有奇点的区域进行积分，可以将奇点附近挖掉，再进行Green公式。
+
+单位外法向量为$\vec n$，另外一种常用形式为：
+
+$$
+\iint_D(\frac{\partial F}{\partial x} +\frac{\partial G}{\partial y}dxdy)=
+\int_{\partial D}Fdy-Gdx\\
+=\int_{\partial D}[F\sin(\tau, x)-G\cos(\tau, x)]ds\\
+=\int_{\partial D}[F\cos(n,x)+G\cos(n,y)]
+$$
