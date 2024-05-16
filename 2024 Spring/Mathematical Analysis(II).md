@@ -907,3 +907,29 @@ $$
 =\int_{\partial D}[F\sin(\tau, x)-G\cos(\tau, x)]ds\\
 =\int_{\partial D}[F\cos(n,x)+G\cos(n,y)]
 $$
+
+类似于单连通区域的方式，我们定义三维空间中的一个区域是二维单连通区域，即对于区域中的任意一个曲面，都可以收缩为一个点。换言之，就是没有洞。
+
+Gauss公式：对于一个二维单连通区域$\Omega$，边界$\partial\Omega$是分片光滑曲面。倘若对$\partial\Omega$赋予一个诱导定向，即指向$\Omega$外部。如果$\vec F\in C^1(\bar\Omega, R^3)$，则
+
+$$
+\iint_{\partial\Omega}\vec F\cdot\vec n ds=\iiint_\Omega\nabla\cdot\vec F dv
+$$
+
+
+
+证明方式：首先，我们要求每一个参数都能被另外两个参数限制在一个合适的连续范围内，然后，我们分三部分进行证明。如果一个区域可以被拆分为有限个上述的特殊区域，那么就可以得到证明。
+
+我们定义$\vec F$在$P$点处的散度为$\nabla\cdot\vec F(P)=\lim_{V\to P}\frac{\int_{\partial V}\vec F\cdot d\vec S}{\mu(V)}$
+
+其表示向量场在一个点附近是汇入还是流出，也记为$\text{div}\vec F$
+
+Stokes公式：
+
+$$
+\int_{\partial\Sigma}\vec F\cdot\tau ds=\int_\Sigma(\nabla\times \vec F)d\vec S
+$$
+
+分量形式可以运用叉乘形式进行导出。一般地，倘若$\Sigma\sub R^2$，那么就退化为了Green公式。
+
+倘若曲面$\Sigma$分别由两个自变量进行参数化，那么，就可以证明。一般而言，其思路为将曲面积分转化为重积分，然后，将重积分转化为别的曲面积分。
