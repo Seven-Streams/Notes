@@ -569,3 +569,69 @@ $\psi_\alpha$表征的，就是在任意的输入下，如果$L$为将执行的�
 我们定义$\varphi_p=\psi_P\to\exist y_0...\exist y_n R\bar k y_0...y_n$
 
 $\bar k$即表征将要执行停机语句。从而，我们得到了一个在停机程序和valid公式之间的规约。说明一阶逻辑中，valid公式具有不可判定性。
+
+# Lec 13
+
+我们称$T\sub L_0^S$是一个理论，如果：$\text{sat}(T);\forall\varphi\in L_0^S,T\vDash\varphi,\ then\ \varphi\in T$
+
+第二点，就是在说这个集合具有封闭性。
+
+我们记$\text{Th}(\mathfrak{A})=\{\varphi\in L_0^S|\mathfrak{A}\vDash\varphi\}$
+
+我们记$\mathfrak{N}=(\N,+,\cdot,0,1),\text{Th}(\mathfrak{N})$称为初等算术。
+
+我们定义$T^\vDash=\{\varphi\in L_0^S|T\vDash\varphi\}$
+
+存在以下三条等价关系。$T^\vDash$是理论，$\text{sat}(T),T^\vDash\neq L_0^S$
+
+我们定义$\Phi_{PA}$由一系列$S_{ar}$句子组成。$S_{ar}=\{+,\cdot,0,1\}$
+
+$$
+\forall x\ \neg x+1\equiv 0\\
+\forall x\ x +0\equiv x\\
+\forall x\ x\cdot0\equiv0\\
+\forall x\forall y(x + 1\equiv y + 1\implies x\equiv y)\\
+\forall x\forall y\ x +(y + 1)\equiv (x+y)+1\\
+\forall x\forall y\ x\cdot(y + 1\equiv)\equiv x\cdot y +x\\
+\text{free}(\varphi)\sub\{x_1,...,x_n,y\}\\
+\forall x_1 ...\forall x_n((\varphi_{0\over y}\wedge\forall y(\varphi\implies \varphi_{y +1\over y}))
+\implies\forall y\varphi)
+$$
+
+说人话，就是存在最小的，加法的单位元。存在数乘中的零映射。
+
+后继相等，可以推出前驱相等。加法具有交换律。乘法具有分配律。具有数学归纳法。
+
+我们称$T$是R-axiomatizable当存在R-decidable$\Phi\sub L_0^S,T=\Phi^\vDash$
+
+也就是说，这个公式集可以被一个可判定的集合所公理化。
+
+我们称$T$是有限axiomatizable的，如果存在有限的$\Phi\sub L_0^S,T=\Phi^\vDash$
+
+每一个R-axiomatizable的理论，都是R-enumerable的。
+
+可被公理化，不一定可被判定。比如valid的公式。
+
+我们称一个理论$T\sub L_0^S$是完备的，如果对于任何的公式$\varphi$，要么$\varphi\in T$,要么$\neg\varphi\in T$
+
+对于一个S-结构$\mathfrak{A}$，$\text{Th}(\mathfrak{A})$一定是完备的。
+
+每一个完备的可被公理化的理论，一定是可判定的；每一个完备的可枚举的理论，一定是可判定的。
+
+为了说明算术的不可判定性，我们需要进行规约。
+
+我们考虑一个公式，$\Chi_P(x_0,...,x_n,z,y_0,...,y_n)$,我们需要说明对于任何的初始状态$(0,l_0,...,l_n)$和任意一个有限步内可达状态$(L,m_0,...,m_n)$，能够有$\mathfrak{N}\vDash\Chi_P[l_0,...,l_n,L,m_0,...,m_n]$
+
+定义$\varphi_P=\exist y_0...\exist y_n\Chi_P(0,...,0,\bar k,y_0,...,y_n)$
+
+其中，$\bar k$定义为$1+1+...+1=k^\N$
+
+如果能够说明算术公理的不可判定性，那么$\text{Th}(\mathfrak{N})$不可被公理化和枚举。从而有$\Phi_{PA}^\vDash\subsetneq\text{Th}(\mathfrak{N})$
+
+我们在构建公式的一个瓶颈是，我们并不预先知道到达一个状态之前，我们走了多少步。
+
+我们用一个自然数序列来刻画每个状态。假设花费了s步到达某一状态，那么我们用一个$(s+1)*(n+1)$的序列来刻画之。前$n+1$个数显然在表征初始状态。对于所有比s小的数，我们都可以通过程序转移到后一状态。
+
+哥德尔$\beta$函数：对于每一个长度为$r$的序列，存在$t,p\in\N,\forall\ i\leq r,\beta(t,p,i)=a_i$
+
+$\mathfrak{N}\vDash\varphi_\beta[t,q,i,a]\iff\beta(t,q,i)=a$
