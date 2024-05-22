@@ -916,8 +916,6 @@ $$
 \iint_{\partial\Omega}\vec F\cdot\vec n ds=\iiint_\Omega\nabla\cdot\vec F dv
 $$
 
-
-
 证明方式：首先，我们要求每一个参数都能被另外两个参数限制在一个合适的连续范围内，然后，我们分三部分进行证明。如果一个区域可以被拆分为有限个上述的特殊区域，那么就可以得到证明。
 
 我们定义$\vec F$在$P$点处的散度为$\nabla\cdot\vec F(P)=\lim_{V\to P}\frac{\int_{\partial V}\vec F\cdot d\vec S}{\mu(V)}$
@@ -933,3 +931,89 @@ $$
 分量形式可以运用叉乘形式进行导出。一般地，倘若$\Sigma\sub R^2$，那么就退化为了Green公式。
 
 倘若曲面$\Sigma$分别由两个自变量进行参数化，那么，就可以证明。一般而言，其思路为将曲面积分转化为重积分，然后，将重积分转化为别的曲面积分。
+
+## 微分形式
+
+0-form$\{f:R^3\to R\}$
+
+1-form$\{Pdx+Qdy+Rdz|P,Q,R:R^3\to R\}$
+
+2-form$\{Pdx\wedge dy+...|P,Q,R:R^3\to R\}$
+
+3-form$\{A(x)dx\wedge dy\wedge dz\}$
+
+外微分$d$的实质，就是将k-form化为k+1-form。
+
+我们规定，外积具有分配律，具有反交换性，一个维度外积上自己值为0。也可以理解为面积为0。对于任意几何图形，求两次边界，结果就是0。
+
+对于0-form进行外微分是平凡的。
+
+广义Stokes定理：
+
+$$
+\int_M d\omega=\int_{\partial M}\omega\\
+<d\omega, M>=<\omega,\partial M>
+$$
+
+# 函数项级数
+
+## 一致收敛及其判定
+
+点态收敛的概念：
+
+固定一个$x$,$S(x)=\lim_{N\to+\infin}\sum_{n=1}^Na_n(x)$  并且$a_n(x)$在$E\sub R$上有定义，我们称$D=\{x\in E|\sum_{n=1}^\infin a_n(x)收敛\}$为$\{a_n(x)\}$的收敛域。我们称$\{a_n(x)\}$点态收敛于$S(x)$
+
+在这里，我们需要一种更加强大的收敛性，也就是一致收敛性。
+
+定义如下：
+
+$$
+\forall\varepsilon>0,\exist N(\varepsilon)\in N^+\\
+\forall n>N(\varepsilon),\forall x\in D,|S_n(x)-S(x)|<\varepsilon
+$$
+
+那么就称$S_n$在$D$上一致收敛，记作$S_n\rightrightarrows S$
+
+它的目标，就是为了抛开$x$，构造和$n$相关的收敛性质。
+
+定义：$d_\infin (f,g)=\sup_{x\in D}|f(x)-g(x)|$
+
+我们定义：$S_n\rightrightarrows S\iff \lim_{n\to\infin}d_\infin(S_n,S)=0$
+
+定义这种一致收敛的概念，是为了更好地保持函数的连续性等性质。
+
+Cauchy收敛原理
+
+$$
+S_n\rightrightarrows S\iff \forall\varepsilon>0,\exist N\in\N,\\
+\forall n>N, \forall p\in\N,\forall x\in D,|S_{n+p}(x)-S_n(x)|<\varepsilon
+$$
+
+一个显然的推论，就是
+
+$$
+\forall\varepsilon>0,\exist N\in\N,
+\forall n>N, \\
+\forall p\in\N,\forall x\in D,|\sum_{k=n+1}^{n+p}u_k(x)|<\varepsilon
+$$
+
+Weierstrass比较判别法：
+
+$$
+|u_n(x)|\leq a_n\in R,(\forall x\in D),\sum_{n=1}^\infin a_n<+\infin,\\
+\sum_{n=1}^\infin u_n(x)在D上一致收敛
+$$
+
+函数项级数的A-D判别法：
+
+$$
+\sum_{n=1}^\infin a_n(x)b_n(x)在D上一致收敛，若以下条件之一满足：\\
+\forall x\in D,\{a_n(x)\}关于n单调，且\{a_n\}一致有界，\sum_{n=1}^\infin b_n(x)\\
+在D上一致收敛；\\
+\forall x\in D,\{a_n(x)\}关于n单调，a_n\rightrightarrows 0,\\
+B_n(x)=\sum_{k=1}^nb_k(x)一致有界
+$$
+
+一致有界，指的是$\exist M>0,\forall n,\forall x\in D,|a_n(x)|<M$
+
+总而言之，一致就可以理解为与$x$无关。
