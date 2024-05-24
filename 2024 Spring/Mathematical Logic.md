@@ -600,7 +600,7 @@ $$
 
 说人话，就是存在最小的，加法的单位元。存在数乘中的零映射。
 
-后继相等，可以推出前驱相等。加法具有交换律。乘法具有分配律。具有数学归纳法。
+后继相等，可以推出前驱相等。加法具有交换律。乘法具有分配律。具有起点为0的数学归纳法。
 
 我们称$T$是R-axiomatizable当存在R-decidable$\Phi\sub L_0^S,T=\Phi^\vDash$
 
@@ -635,3 +635,97 @@ $$
 哥德尔$\beta$函数：对于每一个长度为$r$的序列，存在$t,p\in\N,\forall\ i\leq r,\beta(t,p,i)=a_i$
 
 $\mathfrak{N}\vDash\varphi_\beta[t,q,i,a]\iff\beta(t,q,i)=a$
+
+# Lec 14
+
+$\beta$函数：
+
+首先，我们对$p$提出要求，要求其比$r$和所有的$a_i$都要来得大。这一步的目的是为了构建出一个真正的$p$进制数。随后，我们构造出一个$t$，即：
+
+$$
+1\cdot p^0+a_0\cdot p^1+...+(r+1)\cdot p^{2r}+a_r\cdot p^{2r+1}
+$$
+
+也就是说，我们构造出了一个$p$进制的数。其中，自然数的额外引入用于确定位置。
+
+$\text{claim:}i\leq r,a\in\N,a=a_i\iff\exist b_0,b_1,b_2\in\N,s.t\\ t= b_0+b_1((i+1)+a\cdot p+b_2\cdot p^2)\\ a<p\\ b_0<b_1\\ \exist m\in \N, s.t.\ b_1=p^{2m}$
+
+左推右是平凡的。
+
+右推左的话，由最后一条，我们可以向第一条中回代。由于$i+1$的定位作用和第二，第三条所保证下的$p$进制数的特点，可以得到这一结论。
+
+如果$\mathscr{R}\sub\N^r$是一个可判定的关系，那么就存在一个$L^{S_{ar}}$公式$\varphi(v_0,...,v_{r-1})\in \N,s.t.$
+
+$\mathscr{R}\in\N^r,(l_0,...,l_{r-1})\in\mathscr{R}\iff\mathfrak{N}\vDash\varphi(\bar l_0,...,\bar l_{r-1})$
+
+如果$f:\N^r\to\N$是一个可计算函数，那么类似地，有：
+
+$$
+f(l_0,...,l_{r-1})=l_r\iff\mathfrak{N}\vDash\varphi(\bar l_0,...,\bar l_{r-1},\bar v_r)
+$$
+
+并且，因此会有：
+
+$$
+\mathfrak{N}\vDash\exist^{=1}v_r\varphi(\bar l_0,...,\bar l_{r-1},v_r)
+$$
+
+其中，$\exist^{=1}x\theta(x)$表示$\exist x(\theta(x)\wedge \forall y(\theta(y)\implies y\equiv x))$
+
+说人话，就是唯一存在。
+
+当$\Phi\sub L_0^{S_{ar}}$时，若$r\geq 1$我们对于可表示性做出如下定义：
+
+$\mathscr{R}\sub\N^r$在$\Phi$可被表示，如果存在$\varphi(v_0,...,v_{r-1})$使得：
+
+$$
+(n_0,...,n_{r-1})\in\mathscr{R}\implies \Phi\vdash\varphi(\bar n_0,...,\bar n_{r-1})\\
+(n_0,...,n_{r-1})\not\in\mathscr{R}\implies\Phi\vdash\neg\varphi(\bar n_0,...,\bar n_{r-1})
+$$
+
+$f:\N^r\to\N$在$\Phi$可被表示，也是类似的，即：
+
+$$
+(n_0,...,n_{r-1})= n_r\implies \Phi\vdash\varphi(\bar n_0,...,\bar n_{r-1},\bar n_r)\\
+(n_0,...,n_{r-1})\not= n_r\implies\Phi\vdash\neg\varphi(\bar n_0,...,\bar n_{r-1},\bar n_r)\\
+
+\Phi\vdash\exist^{=1}v_r\varphi(\bar n_0,...,\bar n_{r-1},v_r)
+$$
+
+如果$\Phi$是inconsistent的，那么天然地，每一个关系和函数都是可表示的。
+
+$\Phi\sub\Phi'\sub L_0^{S_{ar}}$,那么在$\Phi$中可表示的，天然在$\Phi'$中可以表示。
+
+如果$\text{cons}(\Phi)$，如果$\Phi$是可判定的，那么$\Phi$可表示的所有关系是可判定的，所有函数是可计算的。
+
+我们称$\Phi$是允许表示的，如果所有可判定的关系和可计算的函数都是可表示的。
+
+$\text{Th}(\mathfrak{N})$和$\Phi_{PA}$都是允许表示的。
+
+不动点定理：假设$\Phi$是允许表示的。那么$\forall\psi\in L_1^{S_{ar}}$，存在$S_{ar}-sentece\ \varphi,s.t.$
+
+$$
+\Phi\vdash\varphi\iff\psi(\overline{[\varphi]})
+$$
+
+$\overline{[\varphi]})$表示这个公式在一个有效的无重复枚举过程中的枚举序。
+
+证明较为复杂。定义一个二元函数$F$有：
+
+$F(n,m)=[\varphi_n(\bar m)],\varphi_n\in L_1^{S_{ar}}-L_0^{S_{ar}};0,otherwise$
+
+这个函数是可计算的。并且有$F([\varphi],m)=[\varphi(\bar m)]$
+
+考虑到$\Phi$是允许表示的，那么就应该有一个公式$\varphi_F(x,y,z)$用来判断$F(n,m)$是否为$l$，并且有着存在唯一性。
+
+我们定义$\beta(v_0):=\forall x(\varphi_F(v_0,v_0,x)\implies \psi(x))$
+
+接下来，我们记$\varphi=\beta(\bar n),n=[\beta]$
+
+那么，$F(n,n)=F([\beta],n)=[\beta(\bar n)]=[\varphi]$
+
+所以$\Phi\vdash \varphi_F(\bar n,\bar n,\overline{[\varphi]})$
+
+所以，$\Phi\cup\{\varphi\}\vdash\psi(\overline{[\varphi]})$
+
+反向，可以由唯一性和$\psi(\overline{[\varphi]})$共同取得。从而得证。
