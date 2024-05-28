@@ -982,6 +982,8 @@ $$
 
 定义这种一致收敛的概念，是为了更好地保持函数的连续性等性质。
 
+倘$u_n(x)\in C[a, b]$，且函数$\sum_{n=1}^\infin u_n(x)$在$(a,b)$一致收敛，则$\sum_{n=1}^\infin u_n(a),\sum_{n=1}^\infin u_n(b)$均收敛，且函数$$\sum_{n=1}^\infin u_n(x)$在$[a,b]$一致收敛。
+
 Cauchy收敛原理
 
 $$
