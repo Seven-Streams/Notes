@@ -729,3 +729,39 @@ $F(n,m)=[\varphi_n(\bar m)],\varphi_n\in L_1^{S_{ar}}-L_0^{S_{ar}};0,otherwise$
 所以，$\Phi\cup\{\varphi\}\vdash\psi(\overline{[\varphi]})$
 
 反向，可以由唯一性和$\psi(\overline{[\varphi]})$共同取得。从而得证。
+
+# Lec 15
+
+定义：
+
+$$
+\Phi^\vdash=\{\varphi\in L^{S_{ar}}|\Phi\vdash\varphi\}
+$$
+
+我们称$\Phi^\vdash$为可表示的，如果：
+
+$$
+\{[\varphi]\in\N|\varphi\in\Phi^\vdash\}=\{[\varphi]|\varphi\in L^{S_{ar}},\Phi\vdash\varphi\}
+$$
+
+在$\Phi$中是可表示的。
+
+引理：倘$\Phi\sub L^{S_{ar}}$是consistent的且允许表示，$\Phi^\vdash$在$\Phi$中不可表示。
+
+证明：假设上述说法不成立。则，对于每一个$\varphi$，都应当有一个$\chi(v_0)$,从而来刻画这种属性。由于consistent，可得：
+
+$$
+\Phi\not\vdash\varphi\iff\neg\chi(\overline{[\varphi]})
+$$
+
+但是，由于$\Phi$允许表示，所以，由不动点定理，可得:
+
+$$
+\exist\varphi,s.t.\Phi\vdash\varphi\iff\neg\chi(\overline{[\varphi]})
+$$
+
+因为，右边也是个$L_1^{S_{ar}}$.
+
+是故，自然可得$\Phi^{\vDash}$亦不可于$\Phi$中得以表示。$\text{Th}(\mathfrak{N})$亦不可于$\text{Th}(\mathfrak{N})$中被表示（这是废话）。
+
+从而，可得哥德尔第一不完备定理：$\Phi$consistent且允许表示，一定会有些sentence$\varphi$，既不可得到$\Phi\vdash\varphi$且不可得到$\Phi\not\vdash\varphi$
