@@ -1074,16 +1074,54 @@ Abel第一定理：
 
 倘$\sum_{n=0}^\infin a_nx^n$在$\xi$处收敛，那么$\forall |x|<|\xi|$，该级数依旧绝对收敛。倘$\sum_{n=0}^\infin a_nx^n$在$\eta$处发散，那么$\forall|x|>|\eta|$，该级数亦发散。但相等时，不可知。
 
-
-
 Abel第二定理：
 
 幂级数在收敛域中内闭一致收敛。倘在收敛域之边界上亦收敛，那么可在不含另侧端点的区间中内闭一致收敛。
 
-
-
 在收敛域中的两点，具有逐项可积性。即先积分，后求极限和先求极限，后积分等价。逐项可导性亦类似。
 
-
-
 利用这一点，我们可以计算高中时常用错位相消解决的问题。其思路，就是将其乘方的对象看做一个自变量，构造一个函数，使得求导后得到目标式子。
+
+# Fourier级数
+
+## 三角函数系
+
+对于$\int_{-\pi}^\pi\cos mx\cos nx dx,\int_{-\pi}^\pi\sin mx\sin nxdx,\int_{-\pi}^\pi\cos nx\sin mxdx$，考察$m=n,m\not=n$或者均为0的情况，可以得到不错的积分值，称为三角函数系的正交性。这里可以使用积化和差公式进行推导。
+
+如果函数$f$以$2\pi$为周期，且函数在区间$[a, b]$上可积或广义绝对可积，那么我们可以有：
+
+$$
+f(x)\sim\frac{a_0}{2}+\sum_{n=1}^\infin(a_n\cos nx + b_n\sin nx)
+$$
+
+并且，对于每一个系数，我们有：
+
+$$
+a_k=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos kx dx\\
+b_k=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin kxdx
+$$
+
+如果一个函数为奇函数，那么$a_i$均为$0$.如果一个函数是偶函数，那么$b_i$均为0.
+
+如果$f$在$[-T, T]$上有所定义，那么可以考虑用$\cos\frac{n\pi x}{T},\sin\frac{n\pi x}{T}$
+
+倘若一个函数$f$越光滑，那么$a_n,b_n$的衰减速度也越快。
+
+Riemann-Lebesgue引理：倘$f$于$[a,b]$上可积或广义绝对可积，那么：
+
+$$
+\lim_{\lambda\to\infin}\int_a^b f(x)\cos\lambda x dx=0\\
+\lim_{\lambda\to\infin}\int_a^b f(x)\sin\lambda x dx = 0
+$$
+
+我们记录Fourier级数之部分和为$S_n[f](x)$
+
+这从直觉上是好理解的。我们称其为n阶Fourier级数多项式。
+
+通过不断的分部积分和变元替换，我们可以得到：
+
+$$
+S_n[f](x)=\frac{1}{\pi}\int_{-\pi}^\pi f(x+u)\frac{\sin\frac{2n+1}{2}u}{2\sin\frac{u}{2}}du
+$$
+
+我们称$\frac{\sin\frac{2n+1}{2}u}{2\sin\frac{u}{2}}$为Dirichlet核。
