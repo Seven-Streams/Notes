@@ -1118,10 +1118,82 @@ $$
 
 这从直觉上是好理解的。我们称其为n阶Fourier级数多项式。
 
-通过不断的分部积分和变元替换，我们可以得到：
+假定$f$为周期为$2\pi$的函数。通过不断的分部积分和变元替换，我们可以得到：
 
 $$
 S_n[f](x)=\frac{1}{\pi}\int_{-\pi}^\pi f(x+u)\frac{\sin\frac{2n+1}{2}u}{2\sin\frac{u}{2}}du
 $$
 
 我们称$\frac{\sin\frac{2n+1}{2}u}{2\sin\frac{u}{2}}$为Dirichlet核。
+
+更加一般化的情况，我们可以考察：
+
+$$
+S_n[f](x)-\frac{f(x+0)+f(x-0)}{2}\\
+=\int_{0}^\pi\frac{f(x+u)-f(x+0)+f(x-u)-f(x-0)}{2}\cdot\frac{1}{\pi}D_n(x)du
+$$
+
+将其积分区间进行拆分，记上式中的被积对象为$h(u)$，将积分区间进行拆分，即：
+
+$$
+\int_0^\delta h(u)du+\int_\delta^\pi h(u)du
+$$
+
+我们只需要关注前一部分即可。因为由Riemann-Lesbegue引理，迫使后一部分趋向于0。
+
+倘若：$f$于$[-\pi,\pi]$可积，于$x$处$f(x+0),f(x-0)$均存在，亦即，不要求函数连续，然需每一点处，两侧极限存在；且，有：
+
+$$
+\int_0^\delta\frac{f(x+u)-f(x+0)}{u}du\\
+\int_0^\delta\frac{f(x-u)-f(x-0)}{u}du
+$$
+
+均绝对收敛，则：
+
+$$
+\lim_{n\to\infin}S_n[f](x)=\frac{1}{2}(f(x+0)-f(x-0))
+$$
+
+Dirichlet定理：
+
+倘$f$以$2\pi$为周期，且分段可导，且至多有有限个极值点，那么有：
+
+$$
+\forall x\in[-\pi,\pi],\lim_{n\to\infin}S_n[f](x)=\frac{1}{2}[f(x+0)+f(x-0)]
+$$
+
+Rmk:倘$f\in C^2[-\pi,\pi]$,且$f(-\pi)=f(\pi),f'(\pi)=f'(-\pi)$，则$S_n[f]\rightrightarrows f$
+
+倘$f(-\pi)=f(\pi)$且函数连续分段线性，那么我们所得的级数亦绝对收敛。
+
+Weierstrass逼近定理：
+
+$f\in C[-\pi,\pi]$,$f(-\pi)=f(\pi)$，则$\forall\varepsilon>0,\exist$有限的三角多项式$T(x)$，即$T(x)=a_0+\sum_{k=1}^l(a_k\cos kx+b_k\sin kx)$，从而使得$|f(x)-T(x)|<\varepsilon,\forall x\in[-\pi,\pi]$
+
+此可通过用阶梯函数$g(x)$去逼近目标之$f(x)$，再用Fourier级数逼近之。
+
+Weierstrass定理：
+
+$$
+f\in C[a, b],\forall\varepsilon>0,\exist P(x)
+$$
+
+其中$P(x)$为一个多项式函数。
+
+$|f(x)-P(x)|<\varepsilon,\forall x\in[a, b]$
+
+Fourier级数在内积空间中收敛。本质上，我们可以认为Fourier级数是"内积空间"$(R[-\pi,\pi],<f,g>=\int_{-\pi}^\pi fgdx$
+
+在正交基$\{1,\sin kx, \cos kx,k\geq 1\}$的展开。
+
+Bassel不等式：
+
+$$
+\frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2)\leq\frac{1}{\pi}\int_{-\pi}^\pi f^2(x)dx
+$$
+
+Parseval等式：
+
+$$
+\frac{a_0^2}{2}+\sum_{n=1}^\infin(a_n^2+b_n^2)=\frac{1}{\pi}\int_{-\pi}^\pi f^2(x)dx
+$$
