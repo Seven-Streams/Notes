@@ -189,3 +189,60 @@ S_2=\{y\in R^m:A^Ty\leq 0,b^Ty>0\}
 $$
 
 第一个集合是空集，当且仅当$b$在$\text{cone}(A)$内。$A^Ty\leq 0$等价于所有所有$\text{cone}(A)$内的点$z$,有$z^Ty\leq 0$
+
+所有的锥包都是封闭的。
+
+## convex functions
+
+凸函数的定义：
+
+- $\text{dom}(f)=S$是个凸集。
+
+- $\forall x, y\in S,\theta\in[0,1],f(\theta x+\bar\theta y)\leq\theta f(x)+\bar\theta f(y)$
+
+也就是琴生不等式成立。
+
+严格凸函数的定义：上述第二点改为$\theta\in(0,1),f(\theta x+\bar\theta y)<\theta f(x)+\bar\theta f(y)$
+
+- $f凸\iff -f凹$
+
+- $f严格凸\iff -f严格凹$
+
+对于一个凸函数$f$而言，其上相异两点$x,y$，下列两条中有且只有一条成立：
+
+- $f(\theta x+\bar\theta y)<\theta f(x)+\bar\theta(y),\theta\in (0,1)$
+
+- $f(\theta x+\bar\theta y)=\theta f(x)+\bar\theta(y),\theta\in[0,1]$
+
+严格凸，实际上再说第二部分是不存在的，也就是说没有哪部分可以用$y=w^T x+b$的形式来表示。
+
+也就是说，函数曲线要么在函数两点连线的下方，要么就是连线。不能和连线有别的相交点。
+
+凸函数的零阶条件：
+
+$$
+f\ is\ convex\iff\forall x\in \text{dom}(f),\forall d,g(t)=f(x+td)\ is\ convex\ \\
+on\ \text{dom}(g)=\{t:x+td\in\text{dom}(f)\}
+$$
+
+这件事情实际上在描述，从任何一个超平面去截这个函数，在切面上应该是凸的。
+
+对于一个凸函数，如果我们想把它的定义域从$S$扩展到$R^n$，那么我们只需要给所有不在$S$中的点定义为$+\infin$即可。这两个函数的凸性是相同的。
+
+凸函数的一阶条件：
+
+可微函数$f$定义在一个开凸集上，那么$f\ is\ convex\ \iff f(y)\geq f(x)+\nabla f(x)^T(y-x),\forall x, y\in \ \text{dom}(f)$
+
+这件事情在描述切线放缩法。
+
+如果我们要求$x,y$相异，把$\geq$改为$>$，那么就变成了严格凸的充分必要条件。
+
+因此，对于凸函数而言，如果$\nabla f(x)=0$，那么这个点一定是全局最小值。
+
+凸函数的二阶条件：
+
+$$
+f\ is\ convex\iff\nabla^2f(x)\ is\ positive\ semidefinite.
+$$
+
+但是，$\nabla^2 f(x)\ is\ positive\ semidefinite$为$f(x)$是严格凸的充分不必要条件。但是对于二次函数$x^TQx+b^Tx+c$而言($Q\ is\ a\ symmetric$)，这一点是充要条件。因为$\nabla^2f(x)=2Q$
