@@ -246,3 +246,55 @@ f\ is\ convex\iff\nabla^2f(x)\ is\ positive\ semidefinite.
 $$
 
 但是，$\nabla^2 f(x)\ is\ positive\ semidefinite$为$f(x)$是严格凸的充分不必要条件。但是对于二次函数$x^TQx+b^Tx+c$而言($Q\ is\ a\ symmetric$)，这一点是充要条件。因为$\nabla^2f(x)=2Q$
+
+对于凸函数而言，如果有局部最小值，那么一定有全局最小值。但是，凸函数不一定有局部最小值。
+
+对于严格凸函数而言，全局最小值如果存在，一定只有一个点。但是，如果全局最小值只可以在一个点处取到，并不意味着这是个严格凸函数。比如绝对值函数。
+
+**sublevel sets**（下水平集）：在定义域中，所以函数值小于某个值$\alpha$的自变量所构成的集合，记作$C_\alpha$
+
+凸函数的下水平集，和凹函数的上水平集都是凸集。但是，非凸函数的下水平集可能都是凸集。比如$\sqrt {|x|}$
+
+epigraph:$f:S\sub \R^n\to \R,\text{epi}\ f=\{(x,y)\in \R^{n+1}:x\in S, y\ge f(x)\}$
+
+定理：$f\ is\ convex\iff \text{epi}\ f\ is\ a\ convex\ set$
+
+凸集的投影，也一定是凸集。
+
+凸函数的一阶条件，暗示着$f(x_0)+\nabla f(x_0)^T(x-x_0)$是$\text{epi}\ f$ 的支撑超平面。
+
+几个不等式：
+
+- Jensen's inequality:$f(\theta x+\bar\theta y)\leq\theta f(x)+\bar\theta f(y),\theta\in [0,1],f\ is\ convex, x,y\in \text{dom}(f)\\=:\theta=0,1$
+
+- Holder's inequality:$\sum_{i=1}^n|x_iy_i|\leq||x||_p||y||_p,p\in(1,+\infin)\\ =:x(y)=0$
+
+- Minkowski's inequality:$||x+y||_p\leq ||x||_p+||y||_p,p\in(1,+\infin)$
+
+### Convexity-preserving operations
+
+- 函数的锥组合，$f(x)=\sum_{i=1}^mc_if_i(x),c_i\ge 0$
+
+- 仿射变换，$f(x)=g(Ax+b)$
+
+- 函数的复合，$f(x)=h(g_1(x),...,g_m(x))$
+
+- 逐点取最大值，即$f(x)=\sup_{i\in I}f_i(x)$
+
+- 部分最小值，$f(x)=\inf_{y\in C}g(x,y)$
+
+函数的锥组合中，不能使用减、乘、除运算。
+
+对于函数的复合而言，我们有：
+
+- $h\ is\ convex,\ h\ is\ increasing,\ g\ is\ convex\implies f\ is\ convex$
+
+- $h\ is\ convex,\ h\ is\ decreasing,\ g\ is\ concave\implies f\ is\ convex$
+
+- $h\ is\ concave,\ h\ is\ increasing,\ g\ is\ concave\implies f\ is\ concave$
+
+- $h\ is\ concave,\ h\ is\ decreasing,\ g\ is\ convex\implies f\ is\ concave$
+
+求二阶导时可以观察到这一点。对于定义域延拓，相似的结果也成立。
+
+逐点取最小值的话，结果不一定是个凹函数。我们对它不能保证任何事情。
