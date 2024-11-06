@@ -236,7 +236,7 @@ $$
 
 电介质的极化过程：使分子的电偶极子有一定的取向，并且提高它的电偶极矩的过程。
 
-极化强度的定义：$\vec P=\frac{\sum_{i}\vec p_i}{\Delta U}$
+极化强度的定义：$\vec P=\frac{\sum_{i}\vec p_i}{\Delta V}$
 
 极化强度计算的实验公式：$\vec P=\chi_e\varepsilon_0\vec E$
 
@@ -342,7 +342,7 @@ $$
 
 其中，$\mu_0=4\pi\times 10^{-7}T\cdot m/A$
 
-直导线产生的磁场：考虑距离电线为$a$的一点P处产生的电场。假设导线两端，与点P在同一侧形成的夹角分别为$\theta_1,\theta_2$，则$B=\frac{\mu_0I}{4\pi a}(\cos\theta_1-\cos\theta_2)$
+直导线产生的磁场：考虑距离电线为$a$的一点P处产生的磁场。假设导线两端，与点P在同一侧形成的夹角分别为$\theta_1,\theta_2$，则$B=\frac{\mu_0I}{4\pi a}(\cos\theta_1-\cos\theta_2)$
 
 因此，对于无限长的直导线而言，$B=\frac{\mu_0I}{2\pi a}$
 
@@ -483,3 +483,92 @@ LC振荡电路中，能量为$U_C+U_L=\frac{Q^2}{2C}+\frac{1}{2}LI^2$，并且$U
 交流电下的RLC电路是一个受迫振动。电阻中，电流电势同步；电感中，电流落后电势；电容中，电流超前电势。其中，$I_m=\frac{\varepsilon_m}{Z}$，其中$Z$是阻抗。$Z=\sqrt{(R)^2+(X_c-X_L)^2}$。当容抗等于感抗是，阻抗最下。共振时，$\omega=\frac{1}{\sqrt{LC}}$
 
 交流电路的平均功率，为$(\frac{I_m}{\sqrt 2})^2R$
+
+## Maxwell方程与电磁波
+
+$$
+\oint\vec Ed\vec A=\frac{Q}{\varepsilon_0}\\
+\oint\vec Bd\vec A=0\\
+\oint\vec Ed\vec s=-\frac{d\phi_B}{dt}\\
+\oint\vec Bd\vec s=\mu_0\varepsilon_0\frac{d\phi_E}{dt}+\mu_0i_{d,enc}
+$$
+
+磁场的旋度：
+
+电荷连续性方程$\nabla\cdot\vec J=-\frac{\partial\rho}{\partial t}$，其中J为电流密度，$\rho$为电荷密度。从而$\oiint_S\vec Jd\vec s=-\frac{dQ}{dt}$
+
+由法拉第定律，则$\nabla\times \vec B=\mu_0\vec J$
+
+旋度的散度一定是零。
+
+从而，当电荷密度非稳定分布时，上式不成立。
+
+我们称$I_{d,enc}$为位移电流，定义为$\varepsilon_0\frac{d\phi_E}{dt}$，位移电流的旋度对应着磁场的二阶变化。
+
+为了使电荷密度非稳定分布时，能够有对应的刻画方式，我们得到了安培-麦克斯韦定律：
+
+$$
+\oint\vec B\cdot d\vec s=\mu_0I_{enc}+\mu_0\varepsilon_0\frac{d\phi_E}{dt}
+$$
+
+微分形式为：
+
+$$
+\nabla\cdot\vec E=\frac{\rho_e}{\varepsilon_0}\\
+\nabla\times\vec E=-\frac{\partial\vec B}{\partial t}\\
+\nabla\cdot\vec B=0\\
+\nabla\times\vec B=\mu_0\varepsilon_0\frac{\partial\vec E}{\partial t}+\mu_0\vec J_e
+$$
+
+电磁波中，电场和磁场同步。
+
+有介质的麦克斯韦方程中，第一个式子和第四个式子需要进行修正。即为：
+
+$$
+\oiint\vec D\cdot d\vec A=Q_e\\
+\oint\vec H\cdot\vec s=\frac{\partial\phi_D}{\partial t}+I_e
+$$
+
+其对应的微分形式为
+
+$$
+\nabla\cdot\vec D=\rho_e\\
+\nabla\times\vec H=\frac{\partial\vec D}{\partial t}+\vec J_e
+$$
+
+波动方程为：
+
+$$
+\frac{\partial^2}{\partial x^2}f-\frac{1}{v^2}\frac{\partial^2 f}{\partial t^2}=0\\
+f=Ae^{i(\omega t+-kx)},k^2=\frac{\omega^2}{v^2}
+$$
+
+其中，$k$为波矢量，即波数；$\omega$为频率，$v$为波速。
+
+从而对电磁波而言，$k^2=\mu_0\varepsilon_0\omega^2$，$c^2=\frac{1}{\mu_0\varepsilon_0}$
+
+电磁波的能量密度为$w=\frac{1}{2}\varepsilon_0\vec E^2+\frac{1}{2}\frac{\vec B^2}{\mu_0}$
+
+能量密度的变化率为$\frac{\partial w}{\partial t}=\varepsilon_0\vec E\cdot\frac{\partial \vec E}{\partial t}+\frac{1}{\mu_0}\vec B\cdot\frac{\partial\vec B}{\partial t}=-\frac{1}{\mu_0}\nabla\cdot(\vec E\times\vec B)$
+
+玻印亭矢量（电磁波能量流密度）定义为$\vec S=\frac{1}{\mu_0}\vec E\times\vec B$，从而有$\frac{\partial w}{\partial t}=-\nabla\cdot\vec S$
+
+定义电磁波能流密度为$S=\frac{1}{\mu_0}EB=\frac{1}{\mu_0 c}E^2$
+
+电磁波强度为$I=\frac{1}{\mu_0c}E^2_{rms}$，其中$E_{rms}=\frac{E_0}{\sqrt 2}$
+
+在电磁波中，电场能量和磁场能量相同。即$w=\frac{1}{2}\varepsilon_0\vec E^2+\frac{1}{2}\frac{\vec B^2}{\mu_0}=\varepsilon_0\vec E^2=\frac{\vec B^2}{\mu_0}$
+
+辐射压：电磁波被物体反射时，物体获得动量和电磁波能量损失之间满足关系$\Delta p=\frac{\Delta U}{c}$，能量完全吸收时$\Delta U=IA\Delta t$，物体受力为$\frac{IA}{c}$，从而光压$P_r=\frac{I}{c}$
+
+## 辐射
+
+相对电荷静止的参考系中，有电场无磁场。
+
+相对电荷运动的惯性参考系下，既有电场也有磁场。
+
+能流通量$S$正比于$EB$正比于$r^{-2}$
+
+多普勒效应：探测器相对于$S$系静止，$S'$系相对$S$系以速度$v$向探测器运动，波源相对$S'$系静止。若$S'$系中，电磁波周期为$T$，则$S$系中周期为$\tau=\frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$，则在$S$系中接受一个电磁波花费时间为$T_r=\frac{(c-v)\tau}{c}=\sqrt\frac{c-v}{c+v}T_s$,从而$v_r=\sqrt\frac{c+v}{c-v}v_s$
+
+哈勃定理：$v=H_0D$，其中$H_0$为哈勃常数，$D$为距离，$v$为星体退行速度。宇宙加速膨胀，说明有暗能量。

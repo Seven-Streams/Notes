@@ -256,3 +256,23 @@ $f:G\to G'$是以$K$为核的同态，那么$\text{img}(f)$与$G/K$同构。
 ### 第三同构定理
 
 $H,N$都在$G$中正规，并且$N\sub H$，则$G/H$与$(G/N)/(H/N)$同构。
+
+## 群与商群间的一一对应定理
+
+如果$N$是$G$的正规子群，那么$G$中所有包含$N$的子群和商群$G/N$的子群存在一一对应关系。即$N\leq H\leq G$，则$H/N\leq G/N$
+
+也就是说，存在这样一个一一映射$\psi:H\mapsto H/N$。并且$H_1\leq H_2\iff H_1/N\leq H_2/N$，并且此时有$[H_2:H_1]=[H_2/N:H_1/N]$
+
+$H$是$G$的正规子群，当且仅当$H/N$是$G/N$中的正规子群。
+
+$H_1$是$H_2$的正规子群，当且仅当$H_1/N$是$H_2/N$的正规子群。并且，$H_2/H_1$与$(H_2/N)/(H_1/N)$同构。
+
+## 有限交换群
+
+在阶为$n$的循环群$<a>$中，$\forall n,m\in \Z^+,m|n\implies\exists H\leq <a>,\text{ord}(H)=m$
+
+
+
+如果$G$是有限交换群，$\text{ord}(G)=n=pm,p\ \text{ is prime,}\implies \exists a\in G,a^p=1$
+
+如果$G$是有限交换群，$\text{ord}(G)=n,\forall m,n\in\Z^+,m|n\implies\exists H\leq G,\text{ord}(H)=m$

@@ -351,3 +351,21 @@ $$
 Complementary slackness:$x,y$分别是原始问题和对偶问题的可行解，那么$x,y$分别是最优解当且仅当$y^T(b-Ax)=0,x^T(A^Ty-c)=0$
 
 也就是说，一项要么为零，要么等号可取。
+
+## 梯度下降法
+
+对于一个凸函数而言，一个点是全局最小值，当且仅当:
+
+$$
+\forall y\in D,\nabla f(x^*)^T(y-x^*)\ge0
+$$
+
+对于梯度下降法而言，我们就是在进行这样的迭代：$x_{k+1}=x_k+t_k\vec v_k,\vec v_k\cdot\nabla f(x_k)<0$
+
+最后我们设定一个收敛条件即可。
+
+Rayleigh商：考虑$Q$为一个对称的半正定矩阵，$\lambda_{min},\lambda_{max}$分别为其最小和最大的特征值。那么我们有$\lambda_{min}||x||_2^2\leq x^TQx\leq\lambda_{max}||x||^2_2$
+
+我们定义一个函数为L-Lipshitz,当$\forall x,y\in\text{dom}\ f,||f(x)-f(y)||\leq L||x-y||$
+
+我们定义一个函数是$L-smooth$,当它的梯度是L-Lipschitz的时候。
