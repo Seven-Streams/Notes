@@ -93,3 +93,31 @@ Carefully design -> better performance.
 - Thread Binding
 
 primitive tensor functions usually don't allocate memory to save time.
+
+## Lec 3
+
+In numpy, `a @ b` = `np.matmul(a, b)`
+
+low-level numpy:
+
+- use a loop instead of array functions when necessarey
+
+- explicitly allocate arrays via numpy.empty and pass them around
+
+`np.testing.assert_allclose(A: np.ndarray, B:np.ndarray, rtol: float32)` is used to check whether the values of two ndarray are the same.
+
+In matmul, spatial axis will appear in the output as an axis, while reduce axis will disappear. These information sometimes can help do optimization.
+
+TensorIR
+
+## Lec 4
+
+The view of computational graph
+
+`call_tir` : used for purify functions
+
+destination pass: destination will be seen as a para provided for functions.
+
+pure function and side effectful
+
+`dataflow()`: used to indicate the codes of a computational graph
