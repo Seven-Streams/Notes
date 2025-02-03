@@ -121,3 +121,11 @@ destination pass: destination will be seen as a para provided for functions.
 pure function and side effectful
 
 `dataflow()`: used to indicate the codes of a computational graph
+
+## Lec 5
+
+Problem:Sometimes we can't determine which factor is proper.
+
+Solution:Use a stochastic method.
+
+Idea: Only focus on the most important part.
