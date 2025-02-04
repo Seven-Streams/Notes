@@ -65,3 +65,71 @@ $Q_{\pi}(s,a)= r(s)+\gamma\sum_{s'\in S}P_{sa}(s')\sum_{a'\in A}\pi(a'|s')Q(s',a
 - Actor-Critic
 
 深度强化学习
+
+## Lec 2 探索与利用
+
+决策可能会造成 bias, 因此我们需要有一定的数据量
+
+- Exploitation: 执行能够获得已知最优收益的决策。
+
+- Exploration: 尝试更多可能的决策，但不一定最优。
+
+### 多臂老虎机(MAB)
+
+问题：如何估计每个拉杆的收益？
+
+显然该取平均值。使用**增量方式**而不是直接算，可以降低其复杂度。
+
+问题：我们应该怎么选择策略？
+
+`Regret` 函数：计算决策和最优决策的收益差。从而有：$\sigma_R=\mathbb{E}_{a\sim\pi}[\sum_{t=1}^TQ(a_t^i)]$
+
+如果一直探索新决策，那么 regret 会线性增大；如果一直不探索新决策，只要不是最优解，那么 regret 也会线性递增。
+
+目前证明了，$\lim_{T\to\infin}\sigma_R\ge k\log T,k$ 为与模型有关常量。
+
+目前，最常采取的策略为 $\epsilon-\text{greedy}$ 策略。有$ 1-\epsilon$ 概率选择利用，有小概率进行探索。它的 regret 也是线性增大的。但只是增长率小一些。
+
+为了把 regret 增长为次线性的，因此可以把 $\epsilon$ 随着时间增长而缩小。其增长率可以成为 $\log T$ 级别的增长。
+
+乐观初始化方法：给每一个 arm 给一个很高的初始化值。从而鼓励多探索每一个选择。由于增量式蒙特卡洛方式进行了更新，所以也确实有可能陷入局部最优解。
+
+基于不确定性测度(UCB)：不确定性越大的价值，那么越具有探索的价值，有可能是更好地策略。因此，我们可以考虑在选择 action 的时候，不仅考虑价值，也考虑不确定性和信息量增益等等。这一点基于 Hoeffding 不等式。
+
+Thompson Sampling 方法：根据每个动作可能成为最优概率来选择动作。直接根据当前每个动作的价值概率分布来建模，然后采样它的对应价值。然后选择价值最大的方法。
+
+多臂老虎机可以看作是一种无状态(state-less)的强化学习
+
+## Lec 3 马尔科夫决策过程(MDP)
+
+随机过程：事件随时间演化的过程。
+
+Markov Process: 具有马尔科夫性质的随机过程。我们称一个状态是马尔科夫的，当且仅当$\mathbb{P}[S_{t+1}|S_t]=\mathbb{P}[S_{t+1}|S_1,...,S_t]$
+
+要求：$[a_1,a_2,...]<[b_1,b_2,...]\iff [r,a_1,a_2,...]<[r,b_1,b_2]$ 那么必须是指数衰减。
+
+MDP: 可以用一个五元组来表示。$(S,A,\{P_{sa}\},\gamma,r)$
+
+占用度量(occupancy measure): $\rho^{\pi}(s,a)=\mathbb{E}[\sum_{t=0}^T\gamma^tP(S_t=s,A_t=a)|\pi],\forall s\in S,a\in A$
+
+用来表征我们有多大程度上忙于某个状态和动作。
+
+在 MDP 中，我们有这两个定理：
+
+Thm1: $\rho^{\pi_1}=\rho^{\pi_2}\iff \pi_1=\pi_2$
+
+Thm2: 给定一个占用度量$\rho$，那么能够生成这个占用度量的唯一策略是$\pi_\rho=\frac{\rho(s,a)}{\sum_{a'}\rho^{\pi}(s,a')}$
+
+从而，我们可以定义一个策略的累计奖励，即：$V(\pi)=\mathbb{E}_\pi[{r(s,a)]}$
+
+MDP 中的目标：$\argmax_{\pi}\rho^\pi(s,a)r(s,a)$
+
+### 策略评估(policy evaluation)和策略提升(policy improvement)
+
+对于每一个状态，我们定义$V^{\pi}(s)=E_{a\sim\pi(s)}[Q^{\pi}(s,a)]$，这是状态的价值。
+
+相关地，对于每一个动作，我们也可以相互地定义$Q^{\pi}(s,a)=r(s,a)+\gamma\sum_{s'\in S}P_{s\pi(s)}(s')V^{\pi}(s')$
+
+如果对于任何一个状态 s, 有$Q^{\pi}(s,\pi'(s))\geq V^{\pi}(s)$， 那么，我们称 $\pi'$ 是 $\pi$ 的策略提升(policy improvement)。也就是说，考虑一种策略，它在当前状态下与原策略不同，后续却完全相同，但是奖励却更高（或不变）了，那么自然就是策略的一种提升。
+
+这是因为通过上面的策略，可以导出$V^{\pi'}(s)\geq V^{\pi}(s)$(策略提升定理，Policy Improvement Theorem)

@@ -129,3 +129,15 @@ Problem:Sometimes we can't determine which factor is proper.
 Solution:Use a stochastic method.
 
 Idea: Only focus on the most important part.
+
+## Lec 6
+
+tensor expression
+
+how to optimize models from pytorch
+
+torchfx module
+
+## Lec 7
+
+Some global memory may be used by several threads. A solution is to read these data once, and transport them in shared memory.(cooperative fetching)
