@@ -141,3 +141,17 @@ torchfx module
 ## Lec 7
 
 Some global memory may be used by several threads. A solution is to read these data once, and transport them in shared memory.(cooperative fetching)
+
+## Lec 8
+
+specialized hardware
+
+- special store
+
+- special operator(tensor intrinsic)
+
+- some copy
+
+tensorization
+
+# 
