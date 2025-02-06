@@ -263,3 +263,185 @@ MC 一般在快速采样下使用。但是 TDL 对于初始值更加敏感。
 使用多步的原因：一些稀疏奖励模型下不太容易得到奖励。可以更新到更多的状态对。
 
 多步树回溯算法(N-step tree backup algorithm): 根据每一个分支是否已经被采样过的情况，进行计算。
+
+## Lec 7 规划与学习
+
+### 模型(model)
+
+给定一个状态，模型能够预测下一个状态和奖励的分布 $p(s',r|s,a)$
+
+模型可以分成分布模型和样本模型两种。模型可以用于模拟经验数据。
+
+### 规划(planning)
+
+也就是根据输入的模型，输出一个策略的过程。可以分成针对状态空间的规划，和根据规划空间的规划。
+
+通过模型进行采样，得到模拟的数据。然后通过模拟的数据去更新值函数，从而改进策略。
+
+世界模型
+
+规划和学习的区别就在于经验是真实的还是模拟得到的。
+
+### Q-planing
+
+重复以下步骤：
+
+1. 随机选择一个状态 $s\in S,a\in A$
+
+2. 把 $s,a$ 输入采样模型，得到采样的奖励 $r$ 以及下一个状态 $s'$
+
+3. 对四元组 $(s,a,r,s')$ 进行 Q-learning
+
+### Dyna-Q 算法
+
+根据真实经验，既更新值函数和策略，也强化模型。
+
+重复以下步骤：
+
+1. $s\leftarrow$ 当前状态
+
+2. $a\leftarrow \epsilon-greedy(s,Q)$
+
+3. 执行 $a$, 得到 $r,s'$
+
+4. $Q(s,a)\leftarrow Q(s,a)+\alpha[r+\gamma\max_{a'}Q(s',a')-Q(s,a)]$
+
+5. $Model(s,a)\leftarrow r,s'$
+
+6. 重复根据模型执行 $Q$ 算法
+
+问题：如何和环境采样？
+
+均匀采样？不是很合适。
+
+**优先级采样**。如果有的状态更新值很多，那么我们更应该在这部分去采样。 
+
+选择期望更新还是采样更新？
+
+期望更新更准确无偏。但是计算量大，需要分布模型。采样更新就很方便。
+
+### 实时动态规划(RTDP)
+
+规划只基于当前的状态。
+
+Rollout 算法：从当前状态进行 MCL。 
+
+## Lec 8 参数化值函数和策略
+
+问题在于：如果我们的状态表非常大，为了维护每一个 $Q(s,a)$ 的开销就会很恐怖。
+
+两种解决方式：
+
+- 离散化或者分桶
+
+- 参数化
+
+分桶的好处：操作简单高效。
+
+缺点：可能过于简单了。
+
+第二种方式：构建一个可学习的函数来近似值函数，即：
+
+$V_\theta(s)\simeq V^\pi(s),Q_\theta(s,a)\simeq Q^\pi(s,a)$
+
+let $J(\theta)=\mathbb{E}_\pi[\frac12(V^\pi(s)-V_\theta(s))^2]$ 尽量小。这就转化为一个优化问题了。对于 $Q$ 函数，也是类似的。
+
+### DQN 算法
+
+ 在第 i 轮上，对待当前的网络参数值，我们有：$L_i(\theta_i)=\mathbb{E}_{(s,a,r,s')\sim U(D)}[(r+\gamma\max_{a'}Q(s',a';\theta_i^-)-Q(s,a;\theta_i))^2]$
+
+其中， $\theta_i$ 是在该轮迭代中将要更新的参数。 $\theta_i^-$ 是目标网络参数，其在 $\theta_i$ 每次更新 $C$ 步之后才更新。
+
+这样做的好处，是可以一次性更新多个状态的估值。
+
+### 策略梯度
+
+将策略也跟着策略化： $\pi_\theta(a|s)=P(a|s;\theta)$
+
+基于策略的 RL : 更容易收敛，大空间更有效，并且可以得到随机策略；缺点是容易被局部最优误导，方差比较大。
+
+### 似然比（Likelihood Ratio）
+
+利用下式，对策略的价值期望进行改写。
+
+$$
+\frac{\partial\pi_\theta(a|s)}{\partial\theta}=\pi_\theta(a|s)\frac{1}{
+    \pi_\theta(a|s)}\frac{\partial\pi_\theta(a|s)}{\partial\theta}
+=\pi_\theta(a|s)\frac{\partial\log\pi_\theta(a|s)}{\partial\theta}
+$$
+
+### 策略梯度定理
+
+对于可微的策略 $\pi_\theta(a|s)$,有 $\frac{\partial J(\theta)}{\partial\theta}=\mathbb{E}_{\pi\theta}[\frac{\partial\log\pi_\theta(a|s)}{\partial\theta}Q^{\pi\theta}(s,a)]$
+
+蒙特卡洛策略梯度 选择多条轨迹进行采样，用其平均值来得到一个经验的值。
+
+### Softmax 随机策略
+
+即：$\pi_\theta(a|s)=\frac{e^{f_\theta(s,a)}}{\sum_{a'}e^{f_\theta(s,a')}}$
+
+## actor-critic
+
+使用两个模块来做拟合。actor 和 critic 可以有着不同的损失函数。 
+
+critic:尽量准确估计动作价值：$Q_\Phi(s,a)\simeq r(s,a)+\gamma\mathbb{E}_{s'\sim p(s'|s,a),a'\sim\pi_\theta(a'|s)}[Q_\Phi(s',a')]$
+
+$J(\theta)=\mathbb{E}_{s\sim p,\pi_\theta}[\pi_\theta(a|s)Q_\Phi(s,a)]$
+
+## Advantageous Actor-Critic
+
+定义优势函数为 $A^\pi(s,a)=Q^\pi(s,a)-V^\pi(s)$
+
+它的想法是进一步减去一个基线函数的值，这样可以出现负值。从而可以提高效率，降低方差。
+
+## Lec 9 深度强化学习价值方法
+
+### DQN
+
+- 经验回放
+
+- 双网络结构
+
+经验回放：要尽量保证采样出的数据的多样性。
+
+双网络结构，即前文中的 $Q$ 和 $Q^-$
+
+### Double DQN
+
+Q-learning 中存在过高估计。解决方式是使用两套独立的参数。一套用来采取行动，一套用来实际优化。即采用的 action 为 $\argmax_{a\in A}Q'(s,a)$
+
+，但优化的和估值的才是 $Q$
+
+### Dueling DQN
+
+即：
+
+$$
+V^\pi(s)=\mathbb{E}_{a\sim\pi(s)}[Q^\pi(s,a)]\\
+A^\pi(s,a)=Q^\pi(s,a)-V^\pi(s)\\
+Q^\pi(s,a)=\mathbb{E}[R_t|s_t=s,a_t=a,\pi]
+$$
+
+通过这样的方式，把$Q$ 拆成两个部分$A$ 和 $V$。想法是网络模拟在 0 附近的值比较好。一般初始化的时候，也是初始化 weight 在 0 附近比较好。
+
+$Q(s,a,\theta,\alpha,\beta)=V(s;\theta,\beta)+A(s,a;\theta,\alpha)-\frac{1}{|A|}\sum_{a'}A(s,a';\theta,\alpha)$
+
+它更容易处理和动作关联比较小的状态的情况。
+
+Double DQN: 解耦合了行动的选择和价值的估计。
+
+Dueling DQN: 把 $Q$ 函数用多个模块进行模拟，精细化捕捉。
+
+Q-learning 系列都是基于价值的 RL 方法。
+
+### 确定性策略
+
+$\pi(s;\theta)=\argmax_aQ_\theta(s,a)$ ：问题在于是不可微的。
+
+同样，定义函数 $J(\pi_\theta)=\mathbb{E}_{s\sim\rho^\pi}[Q^w(s,a)]$
+
+从而：$\nabla_\theta J(\pi_\theta)=\mathbb{E}_{s\sim\rho^\pi}[\nabla_\theta\pi_\theta(s)\nabla_a Q^w(s,a)|a=\pi_\theta(s)]$
+
+### Twin Delayed DDPG(TD3)
+
+一次跑两组初始化不同的参数 $Q$，挑损失函数值更小的做为学习目标。但两个在同时学习。并且，对于策略的输出 action 概率增加一个高斯噪声函数，从而减少过高估计。
