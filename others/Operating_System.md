@@ -335,4 +335,82 @@ Problem: 在哪里保存中断状态？
 
 - 多写 assert
 
- 
+## Lec 9 并发控制：同步(1)
+
+同步的作用：使得多个随时间变化的量在变化过程中保持一定的关系。
+
+即系统到达某个互相已知的状态。
+
+第一种方式：自旋等待同步条件成立。
+
+### 生产者-消费者问题
+
+- Prodecer(生产数据)：如果缓存区有空位，就放入；否则等待。
+
+- Consumer(消费数据)：如果缓冲区有数据，取走；否则等待。
+
+当条件成立时，不可以放弃互斥锁，直接进行操作。实际上，也就是进行了    double check.
+
+使用自旋是很通用简单的方式，但效率很难说。
+
+**条件变量**
+
+`cond_wait(&cv, &lk)`: 目前在等待条件变量 `cv` ，如果不成立，就放弃锁 `lk`. 线程进入睡眠状态。
+
+```cpp
+mutex_lock(&mutex);
+while(!cond) {
+    wait(&cv, &mutex);
+}
+assert(cond);
+...
+cv_broad(&cv);
+mutex_unlock(&mutex);
+```
+
+### 并行编程
+
+只要计算任务可以构成一个有向无环图，并且我们有一个调度者分配任务的效率足够高，算法就可以并行计算。
+
+## Lec 10 并发控制：同步(2)
+
+### 信号量
+
+用互斥锁来实现？每创造一个锁，就获得它。
+
+acquire-release
+
+信号量： mutex + happens-before + 允许多个持有。
+
+
+
+```cpp
+void Acquire(sem_t *sem) {
+    atomic {
+        wait_until(sem->count > 0) {
+            sem->count--;
+        }
+    }
+}
+void Release(sem_t *sem) {
+    atomic {
+        sem->count++;
+    }
+}
+```
+
+比如： `join()`
+
+信号量的好处在于不用 `notify_all()` ，但问题在于有的时候难以实现。
+
+### 三种手段的对比
+
+信号量： mutex 的自然推广，比较干净。
+
+条件变量：万能，但是不干净。 
+
+条件变量是神（
+
+lock ordering
+
+可以用信号量实现条件变量。

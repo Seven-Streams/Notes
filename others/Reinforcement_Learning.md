@@ -445,3 +445,117 @@ $\pi(s;\theta)=\argmax_aQ_\theta(s,a)$ ：问题在于是不可微的。
 ### Twin Delayed DDPG(TD3)
 
 一次跑两组初始化不同的参数 $Q$，挑损失函数值更小的做为学习目标。但两个在同时学习。并且，对于策略的输出 action 概率增加一个高斯噪声函数，从而减少过高估计。
+
+## Lec 10 深度强化学习策略方法
+
+对于随机的策略，则采样到每一个行动的概率有:$\pi_\theta(a|s)=\frac{e^{f_\theta(s,a)}}{\sum_{a'}e^{f_\theta(s,a')}}$
+
+### A3C
+
+AC 和 A2C 算法都是在寻找策略的提升点。
+
+A3C: 异步(Asynchronous) A2C
+
+这样做的原因是因为 Actor 需要大量的数据。有很多个 worker 和环境进行交互。然后每个 worker 计算出一个梯度。把梯度传回给 global worker 进行更新。
+
+### TRPO
+
+ 策略梯度的问题：步长难以确定。
+
+使用老策略抽样状态，但是对 action 进行重要性采样。
+
+保证策略改进的单调性
+
+### PPO(Proximal Policy Optimization)
+
+进一步的改进 TRPO, 不需要重要性采样。
+
+优势函数也进行时序差分。
+
+把 KL 散度因子加入到损失函数中，并且自适应地调整其重要性的因子。
+
+### Lec 11 基于模型的深度强化学习
+
+DRL: low data efficiency
+
+data $\to$ model $\to$ train
+
+Model-based RL: may no need more real data once the model is learnt!
+
+But there will be model compunding error.
+
+off-policy methods are instable and require many datas.
+
+This lecture focuses on blackbox model. 
+
+- how to train the deep model
+
+- the inaccurancy?
+
+- How to use it effectively?
+
+- data effeciency?
+
+### Model Predicted Control
+
+Generate a series of chains of actions on the models. Choose the first action of the best one. 
+
+However, if the action sequences are randomly sampled, there will be higher variance and may not sample the high reward actions.
+
+A refinement is Cross Entropy Method(CEM), sampling actions from a distribution closer to the high-reward actions sampled before, but leads to a larger variance.
+
+### Probabilistic Ensembles with Trajectory Sampling(PETS)
+
+uncertainty can be divided into two parts:
+
+- epistemic uncertainty(some data is missing!)
+
+- aleatoric uncertainty(datas are uncertain!)
+
+PETS:  From (s,a) pair sampled before,  generating mean and covarience to generate $P$. i.e. we build a better model.
+
+It's a way to build model.
+
+### MBPO
+
+When to trust our models?
+
+model-based policy optimization
+
+use the branch rollout to optimize the model.
+
+### Bidirectional Model
+
+This method is to reduce compounding error. 
+
+To the past and the future can reduce the error. 
+
+The biggest problem is the gap between our model and the real model.
+
+**AMPO**
+
+### Lec 12 Imitation Learning
+
+If there isn't a reward?
+
+The easiest policy is behavior cloning, i.e. according to what do humans do and take actions.
+
+How to define loss functions?
+
+- Behavior Cloning(BC)
+
+- Inverse Reinforcement Learning(IRL)
+
+- Generative Adversarial Imitation Learning(GAIL)
+
+BC is very easy, but can leads to catastrophic error.
+
+expert advise $\to$ reward
+
+## Lec 13 Offline RL
+
+The problem is that some data will never appear.
+
+AWR
+
+MOReL
