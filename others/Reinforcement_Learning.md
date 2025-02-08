@@ -559,3 +559,63 @@ The problem is that some data will never appear.
 AWR
 
 MOReL
+
+## Lec 14 Multi-Agent RL
+
+Problem: the environment is not stationary.
+
+Prisoner's Dilemma
+
+normal-form game: a tuple(N, A, u). We can have a matrix to describe it.
+
+Common-payoff Game: $u_i(a)=u_j(a)$, pure coordination games
+
+Zero-sum Game: $u_1(a)+u_2(a)=c$, pure competition
+
+Battle of the sexes
+
+Expected Uitility: $u_i(s)=\sum_{a\in A}u_i(a)\prod_{j=1}^ns_j(a_j)$
+
+best response:$u_i(s_i^*,s_{-i})\ge u_i(s_i,s_{-i})$
+
+Nash Equilibrium
+
+Every game with a finite number of players and actions, there must be at least one Nash Equilibrium.
+
+independent learning?
+
+Nash Q-learning
+
+$v^{Nash}$
+
+1. Solving the  Nash equilibrium $\pi$ of the current stage.
+
+2. Improving the estimation of Q-fuction.
+
+multi-agents $\to$ single-agent
+
+CommNet
+
+COMA
+
+## Lec 15 AI agents and LLMs
+
+LLM Agent
+
+COT
+
+LLM-TS
+
+## Lec 16 Diffusion Models for RL
+
+Diffusion Models
+
+A way to generate samples from pure noises.
+
+classifier/classifier-free guided sampling
+
+non-autoregressive
+
+Diffusion data synthesizer
+
+Generate sub-goals and the generate the routine

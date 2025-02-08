@@ -382,8 +382,6 @@ acquire-release
 
 信号量： mutex + happens-before + 允许多个持有。
 
-
-
 ```cpp
 void Acquire(sem_t *sem) {
     atomic {
@@ -414,3 +412,126 @@ void Release(sem_t *sem) {
 lock ordering
 
 可以用信号量实现条件变量。
+
+## Lec 11 真实世界的并发编程
+
+web 1.0: 静态刷新
+
+web 2.0: 允许后台刷新
+
+web 网页如果发出了多个请求，就会有并发问题了。
+
+异步——回调函数
+
+Solution: event-based concuerrency
+
+允许创建计算节点(fetch, timer...), 但是禁止计算节点之间并行，只是以事件为单位进行调度。
+
+callback hell
+
+高性能计算
+
+物理世界的空间局部性
+
+```cpp
+#pragma omp parallel num_threads(nthread)
+#pragma omp for schedule(static)
+```
+
+高性能计算中散热可能更麻烦了（
+
+数据中心中的并发
+
+长期的维护工作和高吞吐的请求
+
+协程：和线程类似。但是它会一直执行，直到 `yield()` 才可以放弃 CPU.
+
+Goroutine: 线程和协程的混合。只要发现有很长延迟的操作，如 `sleep` 等等时，把这些操作异步掉，即进行 `yield()`.
+
+go 中的类管道
+
+SIMD
+
+SIMT
+
+## Lec 12 并发 bugs
+
+### 死锁(deadlock)
+
+#### AA-Deadlock
+
+```cpp
+lock(&lk);
+...
+lock(&lk);
+```
+
+ 通过一定的 `assert` 可以排查。
+
+#### ABBA-Deadlock
+
+死锁产生的必要条件
+
+- Mutual-exclusion
+
+- Wait-for
+
+- No-preemption
+
+- Circular-chain
+
+最简单的方式是防止 circular-chain 的发生。
+
+Lock ordering: 给锁编号。严格按照大小顺序获得锁。
+
+### 数据竞争(data race)
+
+不同线程访问同一个内存，并且至少有一个是写。
+
+这是 UB.
+
+上错锁 or 没上锁是最可能得原因。
+
+### 原子性和顺序违反
+
+代码中被其他操作插入；事件没有按照预定顺序发生。
+
+## Lec 13 应对并发 bugs
+
+软件危机：
+
+- 无法写出所有规约
+
+- 特性的交互组合是指数增长的
+
+### 死锁的应对
+
+lock ordering
+
+运行时检查死锁，数据竞争等等。
+
+可以为每一个线程取得特定锁和释放特定锁时记录日志，构建图。检查是否有环。
+
+对于连续的同一内存，并且没有 happen before 的保证，那么一定会有竞争。
+
+`-fsanitize=thread`
+
+AddressSanitizer(asan): 非法内存访问
+
+ThreadSanitizer(tsan): 数据竞争
+
+...
+
+### 防御性编程
+
+不进行完整的检查，但是实现简单、有用的检查。如 `assert`
+
+Buffer overrun
+
+canary: 用一些额外的内存检查访存越界。
+
+烫烫烫，屯屯屯，葺葺葺
+
+```cpp
+
+```
