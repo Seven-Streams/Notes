@@ -667,3 +667,128 @@ a.out 功能太少
 预编译
 
 ELF: 把多段字节复制到地址空间中，并且赋予对应的一些权限。然后，把 PC 跳转到指定位置。
+
+## Lec 20 动态链接和加载
+
+实现运行库和应用程序的分离
+
+库依赖也是一种代码克隆
+
+"Dependency hell"
+
+如果只有静态链接，那么每次更新都很麻烦（
+
+两种实现方式：
+
+- 加载时完成重定位。问题是没省内存，且解析量大。
+
+- 编译器生成位置无关代码，调用时要查表。
+
+进程地址空间通过分页机制维护出表面连续的假象
+
+global offset table(GOT):给每一个需要动态链接的符号留下了一个地址的位置。
+
+函数调用该怎么处理？
+
+- 每次调用都查表？
+
+- 直接把地址写进代码？（可能跳不过去）
+
+PLT(Procedure Linkage Table):检查是不是在动态链接下生成，小跳大跳解决。
+
+## Lec 21 系统调用，中断，上下文切换
+
+OS = 对象 + API
+
+`LD_PRELOAD`
+
+### 系统调用指令
+
+syscall: 跳转，并且获得无限的权力
+
+### 中断
+
+操作系统具有开关中断的权限。
+
+中断：封存状态机，然后执行操作系统代码。
+
+保存寄存器现场->调度->恢复寄存器现场
+
+## Lec 22 进程
+
+通过一个地址转化，把 VPN(virtual address) 转换为 PFN(Physical Address).
+
+virtual page number + offset -> physical page number + offset
+
+地址映射实现：
+
+内存： Radix Tree(32-bit: 1024 叉树；64-bit: 512 叉树 原因：正好 4kB)
+
+处理器： CR3
+
+Translation-Lookaside Buffer(TLB): 处理器部分
+
+Inverted Page Table
+
+所有进程共享的 hash table, 以虚拟地址和进程号进行 hash
+
+Demand Paging
+
+```cpp
+fork();
+if(...) {
+    execve();
+}
+```
+
+这样很浪费！
+
+fork() 后直接把父子进程的地址空间标记成只读。如果任一进程决定使用它，那么就复制一份。
+
+copy on write
+
+### UNIX
+
+Robert Morris
+
+## Lec 23 处理器调度
+
+操作系统在中断后，可以选择任何进程执行。
+
+trampoline: 用于状态准备的一小段跳转代码。
+
+资源调度？
+
+建模，预测，决策
+
+niceness
+
+UNIX niceness: 越 nice, 就越同意让其他人获得 CPU 资源。这是很古早的机制了。如果 nice 值相同，会使用公平分享的方式， Round-Robin.
+
+动态优先级(MLFQ): 设计了一个带有优先级的队列。如果愿意让出 CPU, 比如 vim 等（在IO），可以变得 nicer 等等。
+
+目前的 linux 是 Complete Fair Scheduling，为每个进程运行的时间进行准确记录。
+
+problem: 互斥怎么办？
+
+目前的解决方式：不解决
+
+signum
+
+SINGKILL
+
+## Lec 25 持久数据存储
+
+DRAM: 电容
+
+持久存储器可以看成是一个巨大的数组，并且允许按照 block 读写。
+
+磁带
+
+磁鼓
+
+磁盘
+
+软盘: 读写性能太差了！
+
+USB, SSD
